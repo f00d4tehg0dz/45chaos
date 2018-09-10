@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
 
     <!--- Required meta tags --->
     <meta charset="utf-8">
@@ -10,11 +11,11 @@
     <meta name="author" content="@ImagineWorldas1">
     <!--- Facebook --->
     <meta property="og:locale" content="en_US" />
-    <meta property="og:url"                content="https://45chaos.com" />
-    <meta property="og:type"               content="article" />
-    <meta property="og:title"              content="The Chaos of Donald Trumps Presidencye" />
-    <meta property="og:description"        content="A chronicle of the chaos of Donald Trump’s presidency, including lists of all the departures, failed nominations, and empty positions. Including a Mooch Calculator!" />
-    <meta property="og:image"              content="https://45chaos.com/img/social.png" />
+    <meta property="og:url" content="https://45chaos.com" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="The Chaos of Donald Trumps Presidencye" />
+    <meta property="og:description" content="A chronicle of the chaos of Donald Trump’s presidency, including lists of all the departures, failed nominations, and empty positions. Including a Mooch Calculator!" />
+    <meta property="og:image" content="https://45chaos.com/img/social.png" />
     <!--- Twitter --->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:description" content="A chronicle of the chaos of Donald Trump’s presidency, including lists of all the departures, failed nominations, and empty positions. Including a Mooch Calculator!" />
@@ -36,7 +37,7 @@
     <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
     <link rel="icon" type="image/png" href="favicon-128.png" sizes="128x128" />
-    <meta name="application-name" content="&nbsp;"/>
+    <meta name="application-name" content="&nbsp;" />
     <meta name="msapplication-TileColor" content="#FFFFFF" />
     <meta name="msapplication-TileImage" content="mstile-144x144.png" />
     <meta name="msapplication-square70x70logo" content="mstile-70x70.png" />
@@ -53,165 +54,172 @@
     <!--- Main Style --->
     <link rel="stylesheet" href="css/main-min.css" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23840368-23"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23840368-23"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'UA-23840368-23');
-</script>
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-23840368-23');
+    </script>
 
     <title>45 Chaos</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
-      <a class="navbar-brand" href="https://45chaos.com"><img src="./img/logo.png" width="50"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item ">
-            <a class="nav-link" href="https://45chaos.com">Home </a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="https://45chaos.com/mooches">Mooches<span class="sr-only">(current)</span></a>
-          </li>
-        </ul>
-      </div>
+        <a class="navbar-brand" href="https://45chaos.com"><img src="./img/logo.png" width="50">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item ">
+                    <a class="nav-link" href="https://45chaos.com">Home </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="https://45chaos.com/mooches">Mooches<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
     </nav>
     <main role="main">
 
-      <div class="jumbotron jumbotron-fluid shade">
-        <div class="container">
-          <h1>How Many <br>Mooches</h1>
-          <p> Calculate a Time in Mooches! </p>
+        <div class="jumbotron jumbotron-fluid shade">
+            <div class="container">
+                <h1>How Many <br>Mooches</h1>
+                <p> Calculate a Time in Mooches! </p>
 
-          <form action="" role="datefind" class="form-inline justify-content-center" method="post">
-            <div class="input-daterange input-group" id="mooch-datepicker">
-         <div class="form-item">
-          <span class="mooch-calendar"></span>
-            <input class="input-sm form-control" type="text" id="date-info" name="start" placeholder="Select a Date" data-date-format="DD, MM d"/><span class="date-text date-mooch"></span>
+                <form action="" role="datefind" class="form-inline justify-content-center" method="post">
+                    <div class="input-daterange input-group" id="mooch-datepicker">
+                        <div class="form-item">
+                            <span class="mooch-calendar"></span>
+                            <input class="input-sm form-control" type="text" id="date-info" name="start" placeholder="Select a Date" data-date-format="DD, MM d" /><span class="date-text date-mooch"></span>
 
-         </div>
-       <button class="btn btn-primary">Submit</button>
-         </div>
+                        </div>
+                        <button class="btn btn-primary">Submit</button>
+                    </div>
 
-         </form>
+                </form>
 
             </div>
-    </div><!--- Jumbo --->
+        </div>
+        <!--- Jumbo --->
 
-</main><!--- Main --->
+    </main>
+    <!--- Main --->
 
-<section class="date-info">
+    <section class="date-info">
 
 
-<div class="container">
+        <div class="container">
             <div class="row justify-content-center">
-   <div class="col-12">
+                <div class="col-12">
 
-<div id="date-results">
-<h2 class="calc"> Waiting for Calculation! </h2>
+                    <div id="date-results">
+                        <h2 class="calc"> Waiting for Calculation! </h2>
 
-</div>
-</div>
-</div>
-</div>
-
-
-</section> <!--- Calculator Information--->
-<!--- Footer --->
-<footer class="page-footer font-small blue pt-4">
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-    <div class="container-fluid text-center text-md-left">
+    </section>
+    <!--- Calculator Information--->
+    <!--- Footer --->
+    <footer class="page-footer font-small blue pt-4">
 
 
-      <div class="row">
+        <div class="container-fluid text-center text-md-left">
 
 
-        <div class="offset-md-1 col-md-4 mt-md-0 mt-3">
+            <div class="row">
 
 
-          <h5 class="text-uppercase">Information</h5>
-          <p>Data collected and organized by Adrienne Cobb</p>
-          <p>Site Built by Adrian</p>
-
-        </div>        <!--- Content --->
+                <div class="offset-md-1 col-md-4 mt-md-0 mt-3">
 
 
-        <hr class="clearfix w-100 d-md-none pb-3">
+                    <h5 class="text-uppercase">Information</h5>
+                    <p>Data collected and organized by Adrienne Cobb</p>
+                    <p>Site Built by Adrian</p>
 
-        <div class="col-md-3 mb-md-0 mb-3">
-
-
-            <h5 class="text-uppercase">Data Curator Info!</h5>
-
-            <ul class="list-unstyled">
-              <li>
-                <a href="mailto:trumprussia0@gmail.com">Email Me!</a>
-              </li>
-              <li>
-                <a href="https://twitter.com/ImagineWorldas1">Twitter</a>
-              </li>
-              <li>
-                <a href="https://www.reddit.com/user/rusticgorilla">Reddit</a>
-              </li>
-              <li>
-                <a href="https://trumprussiablog.wordpress.com/contact/">Blog</a>
-              </li>
-            </ul>
-
-          </div>
-
-          <div class="col-md-3 mb-md-0 mb-3">
+                </div>
+                <!--- Content --->
 
 
-                                                      <h5 class="text-uppercase">Developer Contact</h5>
+                <hr class="clearfix w-100 d-md-none pb-3">
 
-                                                      <ul class="list-unstyled">
-                                                        <li>
-                                                          <a href="mailto:adrianvfx@gmail.com">Email Me!</a>
+                <div class="col-md-3 mb-md-0 mb-3">
 
 
-                                                      </ul>
+                    <h5 class="text-uppercase">Data Curator Info!</h5>
 
-          </div>  <!--- Links --->
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="mailto:trumprussia0@gmail.com">Email Me!</a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/ImagineWorldas1">Twitter</a>
+                        </li>
+                        <li>
+                            <a href="https://www.reddit.com/user/rusticgorilla">Reddit</a>
+                        </li>
+                        <li>
+                            <a href="https://trumprussiablog.wordpress.com/contact/">Blog</a>
+                        </li>
+                    </ul>
 
+                </div>
 
-      </div>
-
-
-    </div>
-    <!--- Footer Links Container --->
-
-
-    <div class="footer-copyright text-center py-3">© 2018 Copyright:
-      <a href="https://45chaos.com">45 Chaos</a>
-    </div>
-    <!--- Copyright --->
-
-  </footer>
-  <!--- Footer --->
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-  <script
-src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.js"></script>
+                <div class="col-md-3 mb-md-0 mb-3">
 
 
-<script src="js/scripts-min.js"></script>
+                    <h5 class="text-uppercase">Developer Contact</h5>
 
-<!-- Go to www.addthis.com/dashboard to customize your tools --> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b37f2974aa8ebd0"></script>  </body>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="mailto:adrianvfx@gmail.com">Email Me!</a>
+
+
+                    </ul>
+
+                </div>
+                <!--- Links --->
+
+
+            </div>
+
+
+        </div>
+        <!--- Footer Links Container --->
+
+
+        <div class="footer-copyright text-center py-3">© 2018 Copyright:
+            <a href="https://45chaos.com">45 Chaos</a>
+        </div>
+        <!--- Copyright --->
+
+    </footer>
+    <!--- Footer --->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.js"></script>
+
+
+    <script src="js/scripts-min.js"></script>
+
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b37f2974aa8ebd0"></script>
+</body>
+
 </html>
