@@ -17,27 +17,27 @@ $('.to-the-top').click(function() {
     }, 700);
     return false;
 });
-
-// Menu Btn Slides in Mooches Calc
-    $('.menu-btn').click(function() {
-      $(this).toggleClass("menu-btn-left");
-      $('.slide-out').toggleClass('slide-in');
-    });
-
-// Add wrapper to Table to Add Fixed Height
-  $('.row.no-gutters.f-table-row').wrapAll('<div id="f-table-container">');
-if ($('#f-table-container').css('overflow') == 'hidden'){
-  $('#f-table-container').after('<div class="load-more-btn btn">Load The Rest! </div>')
-}
-// Load More Button to remove height and overflow from Wrapper above
-$('.load-more-btn').click(function(){
-  $('#f-table-container').css('overflow','none');
-$('#f-table-container').css('height','100%');
-$('.load-more-btn').hide();
-})
-
-// Load More Button for Showing For Auto Load - No longer needed
-$('.load-more').before('</div>');
+//
+// // Menu Btn Slides in Mooches Calc
+//     $('.menu-btn').click(function() {
+//       $(this).toggleClass("menu-btn-left");
+//       $('.slide-out').toggleClass('slide-in');
+//     });
+//
+// // Add wrapper to Table to Add Fixed Height
+//   $('.row.no-gutters.f-table-row').wrapAll('<div id="f-table-container">');
+// if ($('#f-table-container').css('overflow') == 'hidden'){
+//   $('#f-table-container').after('<div class="load-more-btn btn">Load The Rest! </div>')
+// }
+// // Load More Button to remove height and overflow from Wrapper above
+// $('.load-more-btn').click(function(){
+//   $('#f-table-container').css('overflow','none');
+// $('#f-table-container').css('height','100%');
+// $('.load-more-btn').hide();
+// })
+//
+// // Load More Button for Showing For Auto Load - No longer needed
+// $('.load-more').before('</div>');
 
 // Searches Autocomplete
     $(function() {
@@ -152,53 +152,53 @@ function convertDateInterval(value) {
 
 }
 
-  /* === Disable Lazy Load, no longer needed === */
-    // InfiniteTable();
-
-
-    function InfiniteTable() {
-
-
-      $(window).scroll(function() {
-          var numItems = $('.cards').length;
-            if (numItems == 25) {
-                $('.number-tables').html("Showing the first&nbsp"  +numItems+ ",&nbspscroll to load more")
-            } else if (numItems == 137) {
-              $('.number-tables').html("Showing all&nbsp"  +numItems)
-            }
-
-
-            var lastID = $('.load-more').attr('lastID');
-            if ($(window).scrollTop()  >= $(document).innerHeight() - $(window).height() - 60 && (lastID != 0)) {
-
-
-var request;
-       if(request) {
-           request.abort();
-       }
-           request = $.ajax({
-            type: 'POST',
-            url: 'data.php',
-            async:true,
-            data: {
-              id: lastID
-            },
-            beforeSend: function() {
-              $('.load-more').show();
-            },
-            success: function(html) {
-
-              $('.load-more').remove();
-
-              $('.f-table').append(html);
-            }
-
-          }); //ajax
-
-        }
-        }) // scroll
-
-    } // InfiniteTimeline
+//   /* === Disable Lazy Load, no longer needed === */
+//     // InfiniteTable();
+//
+//
+//     function InfiniteTable() {
+//
+//
+//       $(window).scroll(function() {
+//           var numItems = $('.cards').length;
+//             if (numItems == 25) {
+//                 $('.number-tables').html("Showing the first&nbsp"  +numItems+ ",&nbspscroll to load more")
+//             } else if (numItems == 137) {
+//               $('.number-tables').html("Showing all&nbsp"  +numItems)
+//             }
+//
+//
+//             var lastID = $('.load-more').attr('lastID');
+//             if ($(window).scrollTop()  >= $(document).innerHeight() - $(window).height() - 60 && (lastID != 0)) {
+//
+//
+// var request;
+//        if(request) {
+//            request.abort();
+//        }
+//            request = $.ajax({
+//             type: 'POST',
+//             url: 'data.php',
+//             async:true,
+//             data: {
+//               id: lastID
+//             },
+//             beforeSend: function() {
+//               $('.load-more').show();
+//             },
+//             success: function(html) {
+//
+//               $('.load-more').remove();
+//
+//               $('.f-table').append(html);
+//             }
+//
+//           }); //ajax
+//
+//         }
+//         }) // scroll
+//
+//     } // InfiniteTimeline
 
 
 });
