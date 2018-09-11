@@ -1,3 +1,5 @@
 -worksheet.csv
 cleaned.csv
 config.codekit3
+venv
+__pycache__
