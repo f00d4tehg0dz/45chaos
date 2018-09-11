@@ -7,6 +7,16 @@ $> cd flask
 $> pip3 install -r requirements.txt
 ```
 
+## Using Docker for Local Dev
+
+I slapped together a Dockerfile in case you don't want to mess with python deps or virtualenvs.
+Just edit files as you wish and then:
+
+```bash
+$> cd flask && docker build . -t mooches
+$> docker run --rm -p 5000:5000 mooches # --rm (don't save container) -p (forward port on host to container)
+```
+
 ## Using the manager
 
 ```bash
