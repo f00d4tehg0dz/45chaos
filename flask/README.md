@@ -18,6 +18,9 @@ $> python3 manager.py shell
 # to query the database
 >>> records = models.Mooch.query.all()
 >>> print(records[0].LastName) # get the last name
+
+# to check for updates to the db
+>>> models.update() # will be threaded off on schedule during runtime
 ```
 
 See `flask/mooches/models.py` for the model definition

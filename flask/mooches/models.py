@@ -44,17 +44,45 @@ class Mooch(db.Model):
 def seed():
     db.drop_all()
     db.create_all()
+    records = get_spreadsheet_records()
+    db_objects = enumerate_records(records)
+    for obj in db_objects:
+        db.session.add(obj)
+    db.session.commit()
+
+def update():
+    records = get_spreadsheet_records()
+    db_objects = enumerate_records(records)
+    new_records = []
+    for obj in db_objects:
+        if not mooch_exists(obj):
+            new_records.append(obj)
+    if len(new_records) > 0:
+        for obj in new_records:
+            db.session.add(obj)
+        db.session.commit()
+    else:
+        print("No mooches to update")
+
+def mooch_exists(mooch):
+    query = Mooch.query.filter_by(
+        LastName=mooch.LastName,
+        FirstName=mooch.FirstName,
+        Position=mooch.Position
+    ).first()
+    if query:
+        return True
+    else:
+        return False
+
+def get_spreadsheet_records():
     creds = ServiceAccountCredentials.from_json_keyfile_name(
         CREDENTIAL_FILE,
         SCOPE
     )
     gc = gspread.authorize(creds)
     wks = gc.open(WORKSHEET_NAME).sheet1
-    records = wks.get_all_records(head=HEAD_ROW)
-    db_objects = enumerate_records(records)
-    for obj in db_objects:
-        db.session.add(obj)
-    db.session.commit()
+    return wks.get_all_records(head=HEAD_ROW)
 
 def enumerate_records(records):
     db_objects = []
