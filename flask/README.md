@@ -1,8 +1,15 @@
 # Mooches Flask App
 
+## Installing Deps for Local Development
+
+```bash
+$> cd flask
+$> pip3 install -r requirements.txt
+```
+
 ## Seed a local DB
 
-The models define a function to seed the database for you
+The `models` define a function to seed the database for you
 
 ```bash
 $> python3 manager.py shell
@@ -14,13 +21,6 @@ $> python3 manager.py shell
 ```
 
 See `flask/mooches/models.py` for the model definition
-
-## Installing Deps for Local Development
-
-```bash
-$> cd flask
-$> pip3 install -r requirements.txt
-```
 
 ## Using Docker for Local Dev
 
