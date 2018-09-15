@@ -42,6 +42,7 @@ class Mooch(db.Model):
     Sources = db.Column(db.Text)
 
 def seed():
+    db.drop_all()
     db.create_all()
     creds = ServiceAccountCredentials.from_json_keyfile_name(
         CREDENTIAL_FILE,
