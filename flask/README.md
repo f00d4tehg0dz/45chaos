@@ -1,5 +1,20 @@
 # Mooches Flask App
 
+## Seed a local DB
+
+The models define a function to seed the database for you
+
+```bash
+$> python3 manager.py shell
+>>> models.seed()
+
+# to query the database
+>>> records = models.Mooch.query.all()
+>>> print(records[0].LastName) # get the last name
+```
+
+See `flask/mooches/models.py` for the model definition
+
 ## Installing Deps for Local Development
 
 ```bash
@@ -17,7 +32,7 @@ $> cd flask && docker build . -t mooches
 $> docker run --rm -p 5000:5000 mooches # --rm (don't save container) -p (forward port on host to container)
 ```
 
-## Using the manager
+## Using the manager for local dev
 
 ```bash
 $> python3 manager.py
