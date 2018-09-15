@@ -1,8 +1,9 @@
 # super tiny
-FROM alpine
+FROM ubuntu
 
 # Install python
-RUN apk update && apk add python3
+RUN apt-get update
+RUN apt-get -y install python3 python3-pip python3-dev build-essential apache2 apache2-dev
 
 # copy code/templates to container
 COPY ./ /opt/web
@@ -12,9 +13,10 @@ WORKDIR /opt/web
 
 # install python deps
 RUN pip3 install -r requirements.txt
+RUN pip3 install uwsgi mod_wsgi
 
 # Expose the web port
 EXPOSE 5000
 
 # start the webserver
-CMD python3 manager.py runserver -h 0.0.0.0
+CMD uwsgi mooches.ini
