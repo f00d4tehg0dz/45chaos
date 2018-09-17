@@ -2,6 +2,7 @@ FROM ubuntu
 
 # Install deps
 RUN apt-get update
+RUN apt-get -y dist-upgrade
 RUN apt-get -y install python3 python3-pip python3-dev build-essential apache2 apache2-dev
 
 # copy code/templates to container
