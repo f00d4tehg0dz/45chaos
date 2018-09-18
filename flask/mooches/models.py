@@ -4,6 +4,9 @@ from oauth2client.service_account import ServiceAccountCredentials
 from sqlalchemy.engine.reflection import Inspector
 import gspread
 
+
+TRUMP_INAUGURAL = datetime.strptime("01/20/2017", "%m/%d/%Y").date()
+
 SCOPE = [
     "https://spreadsheets.google.com/feeds",
     "https://www.googleapis.com/auth/drive"
@@ -141,6 +144,8 @@ def enumerate_records(records):
         object.DateLeft = convert_date(record[UI_HEAD["DateLeft"]])
         object.MoochesTime = record[UI_HEAD["MoochesTime"]]
         object.LeaveType = record[UI_HEAD["LeaveType"]]
+        object.TrumpTime = trumpTime(object.DateHired, object.DateLeft)
+        object.TotalTime = (object.DateLeft- object.DateHired).days
         object.Notes = record[UI_HEAD["Notes"]]
         object.Image = record[UI_HEAD["Image"]]
         sources = []
@@ -170,3 +175,15 @@ def convert_date(dateStr):
                 fmt = "%Y"
             date = datetime.strptime(dateStr.split("-")[-1], fmt).date()
     return date
+
+
+def trumpTime(startDate, leaveDate):
+
+    """
+    Return the difference between their leave and either their
+    start or Trump inaugural, whichever was later
+    """
+
+    if startDate < TRUMP_INAUGURAL:
+        startDate = TRUMP_INAUGURAL
+    return (leaveDate - startDate).days
