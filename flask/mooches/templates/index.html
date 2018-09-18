@@ -275,7 +275,7 @@
         $(document).ready(function() {
 
 
-            var dataTable = $('#depart-table').dataTable({
+            var dataTable = $('#depart-table').DataTable({
 
                 serverSide: true,
                 processing: true,
@@ -309,14 +309,15 @@
                 "columnDefs": [{
                         "targets": 10,
                         "visible": false
-                    }, {
+                    },
+                    {
                         type: 'natural-nohtml',
                         targets: 5
                     },
 
                     {
                         "targets": 11,
-                        "data": "Notes",
+                        data: "Notes",
                         "render": function(data, type, full, meta) {
                             return '<button class="btn viewmore">view notes</button>'
                         }
@@ -328,7 +329,6 @@
                     }
                 ]
             });
-
 
             //Add event listener for opening and closing details
             $('#depart-table tbody').on('click', '.viewmore', function() {
@@ -342,7 +342,7 @@
                     tr.removeClass('shown');
                 } else {
                     // Open this row
-                    row.child(row.data()[10]).show();
+                    row.child(row.data()).show();
 
                     tr.addClass('shown');
                     tr.addClass('child');
