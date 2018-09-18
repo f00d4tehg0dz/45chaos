@@ -53,8 +53,7 @@ def bootstrap_app(no_thread=False):
     if not no_thread:
         startUpdates()
         atexit.register(interrupt)
-
-    with app.app_context():
-        models.check_database()
+        with app.app_context():
+            models.check_database()
 
     return app, server_config
