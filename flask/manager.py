@@ -1,7 +1,13 @@
+import sys
+
 from flask_script import Manager, Shell
 from mooches import bootstrap_app, db, models
 
-app, config = bootstrap_app()
+if "runserver" in sys.argv:
+    app, config = bootstrap_app()
+else:
+    app, config = bootstrap_app(no_thread=True)
+
 manager = Manager(app)
 
 def make_shell_context():
