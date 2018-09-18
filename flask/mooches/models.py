@@ -20,8 +20,6 @@ UI_HEAD = {
     "Position": "Position",
     "DateHired": "Date Hired",
     "DateLeft": "Date Left",
-    "TotalTime": "Total Time (days)",
-    "TrumpTime": "Time under Trump (days)",
     "MoochesTime": "Time in Mooches",
     "LeaveType": "Fired/Resigned /Resigned under pressure",
     "Notes": "Notes",
@@ -40,7 +38,7 @@ class Mooch(db.Model):
     LastName = db.Column(db.String(64))
     FirstName = db.Column(db.String(64))
     Affiliation = db.Column(db.String(64))
-    Position = db.Column(db.String(64))
+    Position = db.Column(db.Text)
     DateHired = db.Column(db.Date)
     DateLeft = db.Column(db.Date)
     TotalTime = db.Column(db.Integer)
@@ -48,7 +46,7 @@ class Mooch(db.Model):
     MoochesTime = db.Column(db.Float)
     LeaveType = db.Column(db.String(64))
     Notes = db.Column(db.Text)
-    Image = db.Column(db.Integer)
+    Image = db.Column(db.String(64))
     Sources = db.Column(db.Text)
 
 def check_database():
@@ -141,8 +139,6 @@ def enumerate_records(records):
         object.Position = record[UI_HEAD["Position"]]
         object.DateHired = convert_date(record[UI_HEAD["DateHired"]])
         object.DateLeft = convert_date(record[UI_HEAD["DateLeft"]])
-        object.TotalTime = record[UI_HEAD["TotalTime"]]
-        object.TrumpTime = record[UI_HEAD["TrumpTime"]]
         object.MoochesTime = record[UI_HEAD["MoochesTime"]]
         object.LeaveType = record[UI_HEAD["LeaveType"]]
         object.Notes = record[UI_HEAD["Notes"]]
