@@ -7,6 +7,11 @@ $> cd flask
 $> pip3 install -r requirements.txt
 ```
 
+## Server Configuration
+
+The configuration is at `config.yml`. Leaving as is will assume the defaults.
+This is where you can specify an alternative database, listen port, update interval, etc.
+
 ## Seed a local DB
 
 The `models` define a function to seed the database for you
