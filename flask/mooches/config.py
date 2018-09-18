@@ -28,7 +28,7 @@ def load_config():
 
 def parse_config(config):
     parsed_config = {}
-    if not "host" in config:
+    if not config.get("host"):
         parsed_config["host"] = DEFAULTS["host"]
     else:
         parsed_config["host"] = config["host"]
