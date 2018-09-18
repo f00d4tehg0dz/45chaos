@@ -20,6 +20,10 @@
 # Supported engines are ["mysql", "postgres", "sqlite"]
 # For sqlite URI, use absolute path to a file or relative path to mooches folder
 #
+# For MySQL ensure you have the mysql client installed on the system (already included in Docker container)
+# macOS: brew install mysql
+# ubuntu: apt install libmysqlclient-dev
+#
 #database_engine: sqlite
 #database_uri: data.sqlite
 #database_username:
