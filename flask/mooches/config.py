@@ -21,7 +21,7 @@ def load_config():
 
     Otherwise validate the configuration options
     """
-    
+
     try:
         with open("config.yml", "r") as f:
             config = f.read()
@@ -78,10 +78,15 @@ def parse_db_config(config):
         print("Reverting to default sqlite")
         return DEFAULTS["database_uri"]
 
-    if config["database_engine"] == "mysql":
-        prefix = "mysql"
-    elif config["database_engine"] == "postgres":
-        prefix = "postgresql"
+    if config["database_engine"].lower() in SUPPORTED_ENGINES:
+        if config["database_engine"] == "mysql":
+            prefix = "mysql"
+        elif config["database_engine"] == "postgres":
+            prefix = "postgresql"
+    else:
+        print("%s is not a supported database engine" % config["database_engine"])
+        print("Using default SQLite")
+        return DEFAULTS["database_uri"]
 
     if not config.get("database_username") or not config.get("database_password"):
         print("No sql username or password specified, attempting anonymous access")
