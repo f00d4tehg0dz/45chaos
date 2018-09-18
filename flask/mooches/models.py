@@ -22,7 +22,7 @@ UI_HEAD = {
     "TotalTime": "Total Time (days)",
     "TrumpTime": "Time under Trump (days)",
     "MoochesTime": "Time in Mooches",
-    "LeaveType": "Fired/Resigned/Resigned under pressure",
+    "LeaveType": "Fired/Resigned /Resigned under pressure",
     "Notes": "Notes"
 }
 
