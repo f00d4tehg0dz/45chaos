@@ -47,7 +47,8 @@ $> python3 manager.py
 usage: manager.py [-?] {shell,runserver} ... # shell is useless currently
 
 positional arguments:
-  {shell,runserver}
+  {initdb,shell,runserver}
+    initdb           Seeds the configured database
     shell            Runs a Python shell inside Flask application context.
     runserver        Runs the Flask development server i.e. app.run()
 
