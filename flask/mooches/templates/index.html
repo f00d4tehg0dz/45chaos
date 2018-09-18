@@ -294,6 +294,7 @@
                     loadingIndicator: true
                 },
                 columns: [
+                  { data: "Image" },
                   { data: "Name" },
                   { data: "Affiliation" },
                   { data: "Position" },
@@ -304,6 +305,27 @@
                   { data: "Mooches" },
                   { data: "Fired/Resign" },
                   { data: "Notes" }
+                ],
+                "columnDefs": [{
+                        "targets": 10,
+                        "visible": false
+                    }, {
+                        type: 'natural-nohtml',
+                        targets: 5
+                    },
+
+                    {
+                        "targets": 11,
+                        "data": "Notes",
+                        "render": function(data, type, full, meta) {
+                            return '<button class="btn viewmore">view notes</button>'
+                        }
+                    }, {
+                        "targets": 0,
+                        "render": function(data) {
+                            return '<img src="' + "{{ url_for('static', filename='img', _external=True) }}/" + data + '.JPG" width="80" >'
+                        }
+                    }
                 ]
             });
 

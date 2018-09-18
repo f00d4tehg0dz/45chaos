@@ -31,6 +31,7 @@ def data():
         models.Mooch,
         db.session.query(models.Mooch),
         [
+            ("Image"),
             ("Name", "LastName", lambda i: "{}, {}".format(i.LastName, i.FirstName)),
             ("Affiliation"),
             ("Position"),
