@@ -19,8 +19,6 @@ def bootstrap_app(no_thread=False):
     app = Flask(__name__)
 
     app.config["SQLALCHEMY_DATABASE_URI"] = server_config["database_uri"]
-    app.config["HOST"] = server_config["host"]
-    app.config["PORT"] = server_config["port"]
     app.config["SQLALCHEMY_COMMIT_ON_TEARDOWN"] = True
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
