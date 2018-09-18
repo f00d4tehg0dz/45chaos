@@ -1,0 +1,30 @@
+# SERVER CONFIG
+# All commented values are at their defaults
+
+###
+# Listener Configuration
+###
+#
+#  These values only matter for the uwsgi runtime (docker containers or other server uwsgi instance)
+#  If using manager.py you can specify these options on the command line
+#
+#debug: false
+#host: 0.0.0.0
+#port: 5000
+
+###
+# Database Configuration
+###
+#
+# Defaults to a local sqlite instance.
+# Supported engines are ["mysql", "postgres", "sqlite"]
+# For sqlite URI, use absolute path to a file or relative path to mooches folder
+#
+#database_engine: sqlite
+#database_uri: data.sqlite
+#database_username:
+#database_password:
+#database_name:
+
+# How often in seconds to poll the spreadsheet for updates
+#update_interval: 60

@@ -1,7 +1,7 @@
 from flask_script import Manager, Shell
 from mooches import bootstrap_app, db, models
 
-app = bootstrap_app()
+app, config = bootstrap_app()
 manager = Manager(app)
 
 def make_shell_context():

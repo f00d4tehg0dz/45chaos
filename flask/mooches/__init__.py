@@ -8,16 +8,19 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 db = SQLAlchemy()
 
-from . import models
+from . import models, config
 
 updateThread = threading.Thread()
 
 def bootstrap_app(no_thread=False):
+
+    server_config = config.load_config()
+
     app = Flask(__name__)
 
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///%s" % (
-        os.path.join(basedir, "data.sqlite")
-    )
+    app.config["SQLALCHEMY_DATABASE_URI"] = server_config["database_uri"]
+    app.config["HOST"] = server_config["host"]
+    app.config["PORT"] = server_config["port"]
     app.config["SQLALCHEMY_COMMIT_ON_TEARDOWN"] = True
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
@@ -36,13 +39,17 @@ def bootstrap_app(no_thread=False):
         print("Running mooch update")
         with app.app_context():
             models.update()
-        updateThread = threading.Timer(60, runUpdate, ())
+        updateThread = threading.Timer(
+            server_config["update_interval"], runUpdate, ()
+        )
         updateThread.start()
 
     def startUpdates():
         global updateThread
         print("Starting update thread")
-        updateThread = threading.Timer(60, runUpdate, ())
+        updateThread = threading.Timer(
+            server_config["update_interval"], runUpdate, ()
+        )
         updateThread.start()
 
     if not no_thread:
@@ -52,4 +59,4 @@ def bootstrap_app(no_thread=False):
     with app.app_context():
         models.check_database()
 
-    return app
+    return app, server_config
