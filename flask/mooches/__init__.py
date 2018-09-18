@@ -40,7 +40,7 @@ def bootstrap_app(no_thread=False):
         with app.app_context():
             models.update()
         updateThread = threading.Timer(
-            server_config["update_interval"], runUpdate, ()
+            int(server_config["update_interval"]), runUpdate, ()
         )
         updateThread.start()
 
@@ -48,7 +48,7 @@ def bootstrap_app(no_thread=False):
         global updateThread
         print("Starting update thread")
         updateThread = threading.Timer(
-            server_config["update_interval"], runUpdate, ()
+            int(server_config["update_interval"]), runUpdate, ()
         )
         updateThread.start()
 

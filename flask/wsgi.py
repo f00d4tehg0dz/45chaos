@@ -3,7 +3,7 @@ application, config = bootstrap_app()
 
 if __name__ == "__main__":
     application.run(
-        debug=config["debug"],
+        debug=bool(config["debug"]),
         host=config["host"],
-        port=config["port"]
+        port=int(config["port"])
     )

@@ -28,26 +28,15 @@ def load_config():
 
 def parse_config(config):
     parsed_config = {}
-    if not config.get("host"):
-        parsed_config["host"] = DEFAULTS["host"]
-    else:
-        parsed_config["host"] = config["host"]
-    if not config.get("port"):
-        parsed_config["port"] = DEFAULTS["port"]
-    else:
-        parsed_config["port"] = int(config["port"])
+    for key in ["host", "port", "update_interval", "debug"]:
+        if not config.get(key):
+            parsed_config[key] = DEFAULTS[key]
+        else:
+            parsed_config[key] = config[key]
     if not config.get("database_engine"):
         parsed_config["database_uri"] = DEFAULTS["database_uri"]
     else:
         parsed_config["database_uri"] = parse_db_config(config)
-    if not config.get("update_interval"):
-        parsed_config["update_interval"] = DEFAULTS["update_interval"]
-    else:
-        parsed_config["update_interval"] = int(config["update_interval"])
-    if not config.get("debug"):
-        parsed_config["debug"] = DEFAULTS["debug"]
-    else:
-        parsed_config["debug"] = bool(config["debug"])
     return parsed_config
 
 def parse_db_config(config):
