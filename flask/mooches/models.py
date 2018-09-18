@@ -12,6 +12,7 @@ CREDENTIAL_FILE = "client_secret.json"
 WORKSHEET_NAME = "Trump Gov Departures"
 HEAD_ROW = 4
 
+# Mapping of Database Columns to their spreadsheet equivalent
 UI_HEAD = {
     "LastName": "Last Name",
     "FirstName": "First Name",
@@ -27,7 +28,13 @@ UI_HEAD = {
 }
 
 class Mooch(db.Model):
-    __tablename__ = 'mooches_table'
+
+    """
+    Table definition for mooches scraper
+    """
+
+    __tablename__ = "mooches_table"
+
     id = db.Column(db.Integer, primary_key=True, unique=True)
     LastName = db.Column(db.String(64))
     FirstName = db.Column(db.String(64))
@@ -43,12 +50,22 @@ class Mooch(db.Model):
     Sources = db.Column(db.Text)
 
 def check_database():
+
+    """
+    Check if the table exists, and seed the database if it doesn't
+    """
+
     inspector = Inspector.from_engine(db.engine)
-    if len(inspector.get_table_names()) == 0:
+    if "mooches_table" not in inspector.get_table_names():
         print("Detected missing tables, running seed")
         seed()
 
 def seed():
+
+    """
+    Drop and recreate tables, scrape spreadsheet, and populate the db
+    """
+
     db.drop_all()
     db.create_all()
     records = get_spreadsheet_records()
@@ -58,6 +75,11 @@ def seed():
     db.session.commit()
 
 def update():
+
+    """
+    Scrape the spreadsheet, and if the entry does not already exist then add it
+    """
+
     check_database()
     records = get_spreadsheet_records()
     db_objects = enumerate_records(records)
@@ -73,6 +95,11 @@ def update():
         print("No mooches to update")
 
 def mooch_exists(mooch):
+
+    """
+    Check if an entry already exists in the database
+    """
+
     query = Mooch.query.filter_by(
         LastName=mooch.LastName,
         FirstName=mooch.FirstName,
@@ -84,6 +111,11 @@ def mooch_exists(mooch):
         return False
 
 def get_spreadsheet_records():
+
+    """
+    Return a mapping of all the spreadsheet records using HEAD_ROW as keys
+    """
+
     creds = ServiceAccountCredentials.from_json_keyfile_name(
         CREDENTIAL_FILE,
         SCOPE
@@ -93,6 +125,11 @@ def get_spreadsheet_records():
     return wks.get_all_records(head=HEAD_ROW)
 
 def enumerate_records(records):
+
+    """
+    Parse scraped records into database objects
+    """
+
     db_objects = []
     for record in records:
         object = Mooch()
@@ -117,6 +154,11 @@ def enumerate_records(records):
     return db_objects
 
 def convert_date(dateStr):
+
+    """
+    Handle date inconsistencies
+    """
+
     if len(str(dateStr)) == 4:
         date = datetime.strptime(str(dateStr), "%Y").date()
     else:

@@ -11,6 +11,10 @@ TRUMP_INAUGURAL = datetime.strptime("01/20/2017", "%m/%d/%Y").date()
 
 
 def trumpTime(startDate, leaveDate):
+
+    # Return the difference between their leave and either their
+    # start or Trump inaugural, whichever was later
+
     if startDate < TRUMP_INAUGURAL:
         startDate = TRUMP_INAUGURAL
     return (leaveDate - startDate).days

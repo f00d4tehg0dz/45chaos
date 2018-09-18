@@ -11,6 +11,9 @@ else:
 manager = Manager(app)
 
 def make_shell_context():
+    """
+    Return a shell context with the models and db pre-imported
+    """
     return dict(app=app, db=db, models=models)
 
 @manager.command

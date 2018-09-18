@@ -13,7 +13,15 @@ DEFAULTS = {
     "debug": False
 }
 
+
 def load_config():
+
+    """
+    If the file does not exist, or does not contain any parsable YAML, return DEFAULTS
+
+    Otherwise validate the configuration options
+    """
+    
     try:
         with open("config.yml", "r") as f:
             config = f.read()
@@ -26,7 +34,13 @@ def load_config():
     else:
         return parse_config(loaded)
 
+
 def parse_config(config):
+
+    """
+    For each of the generic configuration options, return the provided value or default
+    """
+
     parsed_config = {}
     for key in ["host", "port", "update_interval", "debug"]:
         if not config.get(key):
@@ -39,7 +53,13 @@ def parse_config(config):
         parsed_config["database_uri"] = parse_db_config(config)
     return parsed_config
 
+
 def parse_db_config(config):
+
+    """
+    Given a database configuration, format a SQL URI to hand to SQLAlchemy
+    """
+
     if config["database_engine"].lower() not in SUPPORTED_ENGINES:
         print("Invalid database engine: %s" % config["database_engine"])
         print("Using default sqlite database")
