@@ -1,6 +1,7 @@
 from . import db
 from datetime import datetime
 from oauth2client.service_account import ServiceAccountCredentials
+from sqlalchemy.engine.reflection import Inspector
 import gspread
 
 SCOPE = [
@@ -41,6 +42,12 @@ class Mooch(db.Model):
     Notes = db.Column(db.Text)
     Sources = db.Column(db.Text)
 
+def check_database():
+    inspector = Inspector.from_engine(db.engine)
+    if len(inspector.get_table_names()) == 0:
+        print("Detected missing tables, running seed")
+        seed()
+
 def seed():
     db.drop_all()
     db.create_all()
@@ -51,6 +58,7 @@ def seed():
     db.session.commit()
 
 def update():
+    check_database()
     records = get_spreadsheet_records()
     db_objects = enumerate_records(records)
     new_records = []

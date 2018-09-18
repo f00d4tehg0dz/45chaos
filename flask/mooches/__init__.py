@@ -49,4 +49,7 @@ def bootstrap_app(no_thread=False):
         startUpdates()
         atexit.register(interrupt)
 
+    with app.app_context():
+        models.check_database()
+
     return app
