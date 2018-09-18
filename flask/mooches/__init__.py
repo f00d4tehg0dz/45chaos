@@ -36,13 +36,13 @@ def bootstrap_app(no_thread=False):
         print("Running mooch update")
         with app.app_context():
             models.update()
-        updateThread = threading.Timer(10, runUpdate, ())
+        updateThread = threading.Timer(60, runUpdate, ())
         updateThread.start()
 
     def startUpdates():
         global updateThread
         print("Starting update thread")
-        updateThread = threading.Timer(10, runUpdate, ())
+        updateThread = threading.Timer(60, runUpdate, ())
         updateThread.start()
 
     if not no_thread:
