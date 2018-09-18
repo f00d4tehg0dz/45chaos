@@ -275,9 +275,46 @@
         $(document).ready(function() {
 
 
-            var dataTable = $('#depart-table').dataTable({
+            var dataTable = $('#depart-table').DataTable({
 
                 serverSide: true,
+                searching: false,
+                responsive: {
+                    details: {
+                        renderer: function(api, rowIdx) {
+                            var data = api.cells(rowIdx, ':hidden').eq(0).map(function(cell) {
+                                var header = $(api.column(cell.column).header());
+                                return '<p style="color:black; background-color:white;">' + header.text() + ' : ' + api.cell(cell).data() + '</p>'; // changing details mark up.
+                            }).toArray().join('');
+
+                            return data ? $('<table/>').append(data) : false;
+                        }
+                    }
+                },
+
+                "order": [
+                    [2, 'asc']
+                ],
+                "aoColumns": [
+
+
+                    null,
+                    null,
+
+                    null,
+
+                    null,
+                    null,
+                    null,
+                    null,
+
+                    null,
+                    null,
+                    null,
+                    null, {
+                        "sClass": "viewmoreTD"
+                    },
+                ],
                 processing: true,
                 ajax: {
                     url: "{{ url_for('main.data') }}", // json datasource
@@ -287,24 +324,55 @@
                         $("#departures-grid").append('<tbody class="departures-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
                         $("#departures-grid_processing").css("display", "none");
                     }
+
                 },
+                dom: "frtiS",
                 scrollY: 600,
                 deferRender: true,
                 scroller: {
                     loadingIndicator: true
                 },
-                columns: [
-                  { data: "Name" },
-                  { data: "Affiliation" },
-                  { data: "Position" },
-                  { data: "Hired" },
-                  { data: "Left" },
-                  { data: "Total Days" },
-                  { data: "Under Trump" },
-                  { data: "Mooches" },
-                  { data: "Fired/Resign" },
-                  { data: "Notes" }
+                "columns": [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+
+
+                    {
+                        "render": function() {
+                            return '<button>delete</button>'
+                        }
+                    }
+                ],
+                "columnDefs": [{
+                        "targets": 10,
+                        "visible": false
+                    }, {
+                        type: 'natural-nohtml',
+                        targets: 5
+                    },
+
+                    {
+                        "targets": 11,
+                        "data": "Notes",
+                        "render": function(data, type, full, meta) {
+                            return '<button class="btn viewmore">view notes</button>'
+                        }
+                    }, {
+                        "targets": 0,
+                        "render": function(data) {
+                            return '<img src="' + '.' + '/' + 'img/' + data + '.JPG" width="80" >'
+                        }
+                    }
                 ]
+
             });
 
 
