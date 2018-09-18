@@ -9,8 +9,8 @@
 #  If using manager.py you can specify these options on the command line
 #
 #debug: false
-#host: 0.0.0.0
-#port: 5000
+#host: 0.0.0.0 # not configurable currently
+#port: 5000 # not configuragble currently
 
 ###
 # Database Configuration
@@ -23,12 +23,20 @@
 # For MySQL ensure you have the mysql client installed on the system (already included in Docker container)
 # macOS: brew install mysql
 # ubuntu: apt install libmysqlclient-dev
-#
+
 #database_engine: sqlite
 #database_uri: data.sqlite
+
+# Below values only apply to MySQL and PostgreSQL
+
 #database_username:
 #database_password:
 #database_name:
 
+###
+# Spreadsheet Polling
+###
+
 # How often in seconds to poll the spreadsheet for updates
+
 #update_interval: 60
