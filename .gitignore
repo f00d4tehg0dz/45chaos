@@ -3,3 +3,4 @@ cleaned.csv
 config.codekit3
 venv
 __pycache__
+data.sqlite
