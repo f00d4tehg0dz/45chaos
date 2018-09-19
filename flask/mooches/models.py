@@ -29,6 +29,7 @@ UI_HEAD = {
     "Image": "Technical stuff for the website (coming soon)"
 }
 
+
 class Mooch(db.Model):
 
     """
@@ -52,6 +53,7 @@ class Mooch(db.Model):
     Image = db.Column(db.String(64))
     Sources = db.Column(db.Text)
 
+
 def check_database():
 
     """
@@ -62,6 +64,7 @@ def check_database():
     if "mooches_table" not in inspector.get_table_names():
         print("Detected missing tables, running seed")
         seed()
+
 
 def seed():
 
@@ -76,6 +79,7 @@ def seed():
     for obj in db_objects:
         db.session.add(obj)
     db.session.commit()
+
 
 def update():
 
@@ -97,6 +101,7 @@ def update():
     else:
         print("No mooches to update")
 
+
 def mooch_exists(mooch):
 
     """
@@ -113,6 +118,7 @@ def mooch_exists(mooch):
     else:
         return False
 
+
 def get_spreadsheet_records():
 
     """
@@ -126,6 +132,7 @@ def get_spreadsheet_records():
     gc = gspread.authorize(creds)
     wks = gc.open(WORKSHEET_NAME).sheet1
     return wks.get_all_records(head=HEAD_ROW)
+
 
 def enumerate_records(records):
 
@@ -157,6 +164,7 @@ def enumerate_records(records):
         db_objects.append(object)
     return db_objects
 
+
 def convert_date(dateStr):
 
     """
@@ -175,6 +183,48 @@ def convert_date(dateStr):
                 fmt = "%Y"
             date = datetime.strptime(dateStr.split("-")[-1], fmt).date()
     return date
+
+
+def get_top_leave_dates():
+    moochers = Mooch.query.all()
+    leaveDates = {}
+    for mooch in moochers:
+        if not leaveDates.get(mooch.DateLeft):
+            leaveDates[mooch.DateLeft] = 1
+        else:
+            leaveDates[mooch.DateLeft] += 1
+    s = [(k, leaveDates[k]) for k in sorted(leaveDates, key=leaveDates.get, reverse=True)]
+    return s[0:5]
+
+
+def get_affiliation_stats():
+    moochers = Mooch.query.all()
+    affiliations = {}
+    for mooch in moochers:
+        if not affiliations.get(mooch.Affiliation):
+            affiliations[mooch.Affiliation] = 1
+        else:
+            affiliations[mooch.Affiliation] += 1
+    return affiliations
+
+
+def get_leave_type_stats():
+    moochers = Mooch.query.all()
+    leaveTypes = {}
+    for mooch in moochers:
+        if not leaveTypes.get(mooch.LeaveType):
+            leaveTypes[mooch.LeaveType] = 1
+        else:
+            leaveTypes[mooch.LeaveType] += 1
+    return leaveTypes
+
+
+def get_average_trump_time():
+    moochers = Mooch.query.all()
+    total = 0
+    for mooch in moochers:
+        total += mooch.TrumpTime
+    return round(float(total/len(moochers)), 2)
 
 
 def trumpTime(startDate, leaveDate):
