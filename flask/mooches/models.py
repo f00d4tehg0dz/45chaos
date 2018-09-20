@@ -227,6 +227,28 @@ def get_average_trump_time():
     return round(float(total/len(moochers)), 2)
 
 
+def get_average_trump_hire_time():
+    moochers = Mooch.query.all()
+    total = 0
+    moochCount = 0
+    for mooch in moochers:
+        if mooch.DateHired >= TRUMP_INAUGURAL:
+            total += mooch.TrumpTime
+            moochCount += 1
+    return round(float(total/moochCount), 2)
+
+
+def get_average_rollover_time():
+    moochers = Mooch.query.all()
+    total = 0
+    moochCount = 0
+    for mooch in moochers:
+        if mooch.DateHired < TRUMP_INAUGURAL:
+            total += mooch.TrumpTime
+            moochCount += 1
+    return round(float(total/moochCount), 2)
+
+
 def trumpTime(startDate, leaveDate):
 
     """
