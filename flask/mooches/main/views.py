@@ -30,4 +30,18 @@ def data():
             ("Notes")
         ]
     )
+    table.searchable(
+        lambda queryset, user_input:
+            perform_search(queryset, user_input)
+    )
     return json.dumps(table.json())
+
+def perform_search(queryset, user_input):
+    return queryset.filter(
+        db.or_(
+            models.Mooch.LastName.like('%' + user_input + '%'),
+            models.Mooch.FirstName.like('%' + user_input + '%'),
+            models.Mooch.Affiliation.like('%' + user_input + '%'),
+            models.Mooch.Position.like('%' + user_input + '%')
+            )
+        )
