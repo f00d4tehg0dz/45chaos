@@ -42,6 +42,14 @@ data "aws_ami" "amzn_linux2" {
   owners = ["amazon"]
 }
 
+data "template_file" "web_userdata" {
+  template = "${file("${path.module}/web_userdata.tpl")}"
+
+  vars {
+    environment = "${var.environment}"
+  }
+}
+
 resource "aws_instance" "web" {
   ami                  = "${data.aws_ami.amzn_linux2.id}"
   instance_type        = "t2.micro"
@@ -49,7 +57,7 @@ resource "aws_instance" "web" {
   security_groups      = ["${data.aws_security_group.web_sg.id}"]
   subnet_id            = "${data.aws_subnet.public_subnet.id}"
   iam_instance_profile = "${var.name}-web-${var.environment}"
-  user_data            = "${file("${path.module}/web_userdata.sh")}"
+  user_data            = "${data.template_file.web_userdata.rendered}"
 
   tags {
     Name = "${var.name}-web-${var.environment}"
@@ -60,6 +68,7 @@ resource "aws_instance" "web" {
   }
 
   lifecycle {
-    ignore_changes = ["security_groups"]
+    create_before_destroy = true
+    ignore_changes        = ["security_groups"]
   }
 }
