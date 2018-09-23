@@ -52,7 +52,8 @@ data "template_file" "web_userdata" {
   template = "${file("${path.module}/web_userdata.tpl")}"
 
   vars {
-    environment = "${var.environment}"
+    environment  = "${var.environment}"
+    nginx_config = "${file("${path.module}/nginx-${var.environment}.conf")}"
   }
 }
 
