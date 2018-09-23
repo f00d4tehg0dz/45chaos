@@ -10,6 +10,6 @@ terraform {
   }
 }
 
-module "database" {
+module "bastion" {
   source = "../../../modules/bastion"
 }
