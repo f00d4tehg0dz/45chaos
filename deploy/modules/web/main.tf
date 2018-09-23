@@ -6,6 +6,8 @@ variable "environment" {
   default = "dev"
 }
 
+variable "public_ip" {}
+
 data "aws_vpc" "main_vpc" {
   filter {
     name   = "tag:Name"
@@ -42,6 +44,10 @@ data "aws_ami" "amzn_linux2" {
   owners = ["amazon"]
 }
 
+data "aws_eip" "public_ip" {
+  public_ip = "${var.public_ip}"
+}
+
 data "template_file" "web_userdata" {
   template = "${file("${path.module}/web_userdata.tpl")}"
 
@@ -68,7 +74,11 @@ resource "aws_instance" "web" {
   }
 
   lifecycle {
-    create_before_destroy = true
-    ignore_changes        = ["security_groups"]
+    ignore_changes = ["security_groups"]
   }
+}
+
+resource "aws_eip_association" "proxy_eip" {
+  instance_id   = "${aws_instance.web.id}"
+  allocation_id = "${data.aws_eip.public_ip.id}"
 }
