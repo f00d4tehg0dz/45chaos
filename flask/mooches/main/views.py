@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import render_template, request, jsonify
 from datatables import DataTable
 import json
 
@@ -45,3 +45,8 @@ def perform_search(queryset, user_input):
             models.Mooch.Position.like('%' + user_input + '%')
             )
         )
+
+@main.route('/search', methods=['GET'])
+def search():
+    query = db.session.query(models.Mooch.LastName, models.Mooch.FirstName).order_by(models.Mooch.FirstName).all()
+    return jsonify(query)
