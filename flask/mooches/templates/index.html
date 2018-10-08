@@ -272,83 +272,113 @@
     <script src="{{ url_for('static', filename='js/scripts.js', _external=True) }}"></script>
 
     <script>
-        $(document).ready(function() {
-
-
-            var dataTable = $('#depart-table').DataTable({
-
-                serverSide: true,
-                processing: true,
-                ajax: {
-                    url: "{{ url_for('main.data') }}", // json datasource
-                    type: "post", // method  , by default get
-                    error: function() { // error handling
-                        $(".departures-grid-error").html("");
-                        $("#departures-grid").append('<tbody class="departures-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
-                        $("#departures-grid_processing").css("display", "none");
-                    }
-                },
-                scrollY: 600,
-                deferRender: true,
-                scroller: {
-                    loadingIndicator: true
-                },
-                columns: [
-                  { data: "Image" },
-                  { data: "Name" },
-                  { data: "Affiliation" },
-                  { data: "Position" },
-                  { data: "Hired" },
-                  { data: "Left" },
-                  { data: "Total Days" },
-                  { data: "Under Trump" },
-                  { data: "Mooches" },
-                  { data: "Fired/Resign" },
-                  { data: "Notes" }
-                ],
-                "columnDefs": [{
-                        "targets": 10,
-                        "visible": false
-                    },
-                    {
-                        type: 'natural-nohtml',
-                        targets: 5
-                    },
-
-                    {
-                        "targets": 11,
-                        data: "Notes",
-                        "render": function(data, type, full, meta) {
-                            return '<button class="btn viewmore">view notes</button>'
-                        }
-                    }, {
-                        "targets": 0,
-                        "render": function(data) {
-                            return '<img src="' + "{{ url_for('static', filename='img', _external=True) }}/" + data + '.JPG" width="80" >'
-                        }
-                    }
-                ]
-            });
-
-            //Add event listener for opening and closing details
-            $('#depart-table tbody').on('click', '.viewmore', function() {
-                var tr = $(this).closest('tr');
-                var row = dataTable.row(tr);
-
-                if (row.child.isShown()) {
-                    // This row is already open - close it
-                    row.child.hide();
-                    // $('td[colspan=11]').removeClass('commentcard');
-                    tr.removeClass('shown');
-                } else {
-                    // Open this row
-                    row.child(row.data()).show();
-
-                    tr.addClass('shown');
-                    tr.addClass('child');
-                    $('td[colspan=11]').addClass('child');
-                }
-            });
+    $(document).ready(function() {
+        var fullList = [];
+        function loadFullList() {
+          $.getJSON('/search', function(data, status, xhr) {
+            for (var i = 0; i < data.length; i++) {
+              fullList.push(data[i].FirstName);
+            }
+          });
+        };
+        loadFullList();
+        $('.searchs').autocomplete({
+          source: fullList,
+        });
+        });
+        $('form[role="search"]').submit(function(ev) {
+        var search_term = $('#search_box').val().trim();
+        $.ajax({
+          data: {
+            q: search_term
+          },
+          type: 'POST',
+          url: '/searchComplete'
+        }).done(function(data1) {
+          if (data.error) {
+            $('#search_results').text(data.error).show();
+          } else {
+            $('#search_results').html(data.q).show()
+          }
+        })
+        e.preventDefault();
+        });
+        var dataTable = $('#depart-table').DataTable({
+        serverSide: true,
+        processing: true,
+        ajax: {
+          url: "{{ url_for('main.data') }}", // json datasource
+          type: "post", // method  , by default get
+          error: function() { // error handling
+            $(".departures-grid-error").html("");
+            $("#departures-grid").append('<tbody class="departures-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
+            $("#departures-grid_processing").css("display", "none");
+          }
+        },
+        scrollY: 600,
+        deferRender: true,
+        scroller: {
+          loadingIndicator: true
+        },
+        columns: [{
+          data: "Image"
+        }, {
+          data: "Name"
+        }, {
+          data: "Affiliation"
+        }, {
+          data: "Position"
+        }, {
+          data: "Hired"
+        }, {
+          data: "Left"
+        }, {
+          data: "Total Days"
+        }, {
+          data: "Under Trump"
+        }, {
+          data: "Mooches"
+        }, {
+          data: "Fired/Resign"
+        }, {
+          data: "Notes"
+        }],
+        "columnDefs": [{
+          "targets": 10,
+          "visible": false
+        }, {
+          type: 'natural-nohtml',
+          targets: 5
+        }, {
+          "targets": 11,
+          data: "Notes",
+          "render": function(data, type, full, meta) {
+            return '<button class="btn viewmore">view notes</button>'
+          }
+        }, {
+          "targets": 0,
+          "render": function(data) {
+            return '<img src="' + "{{ url_for('static', filename='img', _external=True) }}/" + data + '.JPG" width="80" >'
+          }
+        }]
+        });
+        //Add event listener for opening and closing details
+        $('#depart-table tbody').on('click', '.viewmore', function() {
+        var tr = $(this).closest('tr');
+        var row = dataTable.row(tr);
+        if (row.child.isShown()) {
+        // This row is already open - close it
+        row.child.hide();
+        // $('td[colspan=11]').removeClass('commentcard');
+        tr.removeClass('shown');
+        } else {
+        // Open this row
+        row.child(row.data()).show();
+        tr.addClass('shown');
+        tr.addClass('child');
+        $('td[colspan=11]').addClass('child');
+        }
+        });
         });
     </script>
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
