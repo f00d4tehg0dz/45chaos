@@ -1,5 +1,6 @@
-from flask import render_template, request, jsonify
+from flask import render_template, request
 from datatables import DataTable
+import datetime
 import json
 
 from . import main
@@ -49,4 +50,24 @@ def perform_search(queryset, user_input):
 @main.route('/search', methods=['GET'])
 def search():
     query = db.session.query(models.Mooch.LastName, models.Mooch.FirstName).order_by(models.Mooch.FirstName).all()
-    return jsonify(query)
+    return json.dumps(query)
+
+#@main.route('/search', methods=['GET'])
+#def search():
+#    query = models.Mooch.query.all()
+#    #query = models.Mooch.query.filter_by(LastName=some_term).all()
+#    return jsonify_mooches(query)
+
+def jsonify_mooches(mooches):
+    jsonified = []
+    for mooch in mooches:
+        data = vars(mooch)
+        mooch_dict = {}
+        for k, v in data.items():
+            if k != "_sa_instance_state":
+                if isinstance(v, datetime.date):
+                    mooch_dict[k] = v.strftime("%m/%d/%Y")
+                else:
+                    mooch_dict[k] = v
+        jsonified.append(mooch_dict)
+    return json.dumps(jsonified)
