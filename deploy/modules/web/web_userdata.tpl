@@ -35,6 +35,7 @@ git_key=$$(aws ssm get-parameter --region us-west-2 --name "mooches-git-key" --w
 database_password=$$(aws ssm get-parameter --region us-west-2 --name "mooches-database-password-${environment}" --with-decryption | jq .Parameter.Value -r)
 database_url=$$(aws rds describe-db-instances --region us-west-2 --db-instance-identifier mooches-mysql-${environment} | jq -r .DBInstances[0].Endpoint.Address)
 web_password=$$(aws ssm get-parameter --region us-west-2 --name "mooches-web-password" --with-decryption | jq .Parameter.Value -r)
+google_creds=$$(aws ssm get-parameter --region us-west-2 --name "mooches-google-credentials" --with-decryption | jq .Parameter.Value -r)
 
 # write ssh key
 cat << EOF > ~ec2-user/.ssh/id_rsa
@@ -70,6 +71,11 @@ database_password: $${database_password}
 database_name: chaos
 EOF
 
+# write google credentails
+cat << EOF > /opt/web/client_secret.json
+$${google_creds}
+EOF
+
 # checkout, build, and run flask app
 cd /opt/web/45chaos && git checkout zimmerman
 cat << EOF > /opt/web/docker-compose.yml
@@ -81,5 +87,6 @@ services:
       - 5000:5000
     volumes:
       - /opt/web/config.yml:/opt/web/config.yml
+      - /opt/web/client_secret.json:/opt/web/client_secret.json
 EOF
 cd /opt/web && docker-compose up -d
