@@ -66,15 +66,4 @@ def searchprocess():
 
 # use this function when you have a list of models.Mooch objects to return
 def jsonify_mooches(mooches):
-    jsonified = []
-    for mooch in mooches:
-        data = vars(mooch)
-        mooch_dict = {}
-        for k, v in data.items():
-            if k != "_sa_instance_state":
-                if isinstance(v, datetime.date):
-                    mooch_dict[k] = v.strftime("%m/%d/%Y")
-                else:
-                    mooch_dict[k] = v
-        jsonified.append(mooch_dict)
-    return json.dumps(jsonified)
+    return json.dumps([x.json() for x in mooches])
