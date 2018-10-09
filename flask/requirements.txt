@@ -6,6 +6,7 @@ datatables==0.4.9
 Flask==1.0.2
 Flask-Script==2.0.6
 Flask-SQLAlchemy==2.3.2
+Flask-WTF==0.14.2
 google-api-python-client==1.7.4
 google-auth==1.5.1
 google-auth-httplib2==0.0.3
@@ -28,4 +29,6 @@ six==1.11.0
 SQLAlchemy==1.2.11
 uritemplate==3.0.0
 urllib3==1.23
+uWSGI==2.0.17.1
 Werkzeug==0.14.1
+WTForms==2.2.1
