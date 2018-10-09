@@ -1,4 +1,7 @@
-from flask import render_template, request
+from flask import render_template, request, jsonify
+from flask_wtf import FlaskForm
+from wtforms import StringField
+from wtforms.validators import DataRequired, Length
 from datatables import DataTable
 import datetime
 import json
@@ -48,26 +51,28 @@ def perform_search(queryset, user_input):
         )
 
 @main.route('/search', methods=['GET'])
-def search():
+def searchs():
     query = db.session.query(models.Mooch.LastName, models.Mooch.FirstName).order_by(models.Mooch.FirstName).all()
     return json.dumps(query)
 
-#@main.route('/search', methods=['GET'])
-#def search():
-#    query = models.Mooch.query.all()
-#    #query = models.Mooch.query.filter_by(LastName=some_term).all()
-#    return jsonify_mooches(query)
+@main.route('/process', methods=['GET', 'POST'])
+def searchprocess():
+    search_string = request.args.get('search_term')
+    query = models.Mooch.query.filter_by(LastName=search_string).first()
+    def jsonify_mooches(mooches,query):
+        jsonified = []
+        for mooch in mooches:
+            data = vars(mooch)
+            mooch_dict = {}
+            for k, v in data.items():
+                if k != "_sa_instance_state":
+                    if isinstance(v, datetime.date):
+                        mooch_dict[k] = v.strftime("%m/%d/%Y")
+                    else:
+                        mooch_dict[k] = v
+            jsonified.append(mooch_dict)
+        return json.dumps(jsonified)
+    #return json.dumps(query)
+    #return jsonify(query)
 
-def jsonify_mooches(mooches):
-    jsonified = []
-    for mooch in mooches:
-        data = vars(mooch)
-        mooch_dict = {}
-        for k, v in data.items():
-            if k != "_sa_instance_state":
-                if isinstance(v, datetime.date):
-                    mooch_dict[k] = v.strftime("%m/%d/%Y")
-                else:
-                    mooch_dict[k] = v
-        jsonified.append(mooch_dict)
-    return json.dumps(jsonified)
+    return jsonify_mooches(query)

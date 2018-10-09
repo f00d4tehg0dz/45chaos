@@ -98,10 +98,10 @@
                 <h1>Departures and <br>Nominations </h1>
                 <p> Search for Trump administration departures </p>
 
-                <form action="" role="search" class="form-inline justify-content-center" method='post'>
+                <!-- <form role="search" class="form-inline justify-content-center" >
                     <div class="col-md-5 col-sm-8">
                         <div class="input-group">
-                            <input type="text" class="searchs form-control" id="search_box" name="search" placeholder="Type in a Name and Go!">
+                            <input type="text" class="searchs form-control" id="search_box" placeholder="Type in a Name and Go!">
 
                             <span class="input-group-btn">
           <button class="btn searchBtn btn-secondary" type="submit">Go!</button>
@@ -110,7 +110,15 @@
                         </div>
 
                     </div>
-                </form>
+                </form> -->
+                <form class="form-inline">
+
+  <div class="form-group">
+    <label class="sr-only" for="nameInput">Name</label>
+    <input type="text" class="form-control" id="search_box" placeholder="First Name">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
 
             </div>
         </div>
@@ -277,32 +285,59 @@
         function loadFullList() {
           $.getJSON('/search', function(data, status, xhr) {
             for (var i = 0; i < data.length; i++) {
-              fullList.push(data[i].FirstName);
+              fullList.push(data[i][0]);
             }
           });
         };
         loadFullList();
-        $('.searchs').autocomplete({
+        $('#search_box').autocomplete({
           source: fullList,
         });
-        });
-        $('form[role="search"]').submit(function(ev) {
-        var search_term = $('#search_box').val().trim();
-        $.ajax({
-          data: {
-            q: search_term
-          },
-          type: 'POST',
-          url: '/searchComplete'
-        }).done(function(data1) {
-          if (data.error) {
-            $('#search_results').text(data.error).show();
-          } else {
-            $('#search_results').html(data.q).show()
-          }
-        })
-        e.preventDefault();
-        });
+        // $('form[role="search"]').submit(function(ev) {
+
+        $('form').on('submit', function(event) {
+
+          var search_term = $('#search_box').val()
+
+          alert(search_term)
+        		$.ajax({
+              dataType: 'json',
+                       contentType: 'application/json; charset=utf-8',
+                       data: JSON.stringify(search_term),
+
+        			type : 'POST',
+        			url : '/process',
+              success: function( data ) {
+                //figuring out whats getting sent back
+                 alert(JSON.stringify(data));
+              }
+        		})
+
+        		.done(function(data) {
+              
+        			if (data.error) {
+        				$('#errorAlert').text(data.error).show();
+        				$('#successAlert').hide();
+        			}
+        			else {
+        				// $('#successAlert').text(data.name).show();
+        				// $('#errorAlert').hide();
+                var res = "";
+							// create the html with results
+							for(i in data.results){
+								res += "<div>"+data.results[i]+"</div>";
+							}
+              alert(res)
+							$("#results").html(res);
+        			}
+
+        		});
+
+        		event.preventDefault();
+
+        	});
+
+
         var dataTable = $('#depart-table').DataTable({
         serverSide: true,
         processing: true,

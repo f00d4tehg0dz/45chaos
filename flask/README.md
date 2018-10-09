@@ -6,6 +6,16 @@
 $> cd flask
 $> pip3 install -r requirements.txt
 ```
+## For Windows make sure Ubuntu from AppStore is installed
+```bash
+$> cd flask
+$> apt-get update
+$> apt-get install python3-pip
+$> apt-get install apache2-dev
+$> apt-get install mysql-server
+
+# $> set MOD_WSGI_APACHE_ROOTDIR="C:/xampp/apache"
+
 
 ## Server Configuration
 
