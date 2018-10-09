@@ -57,22 +57,24 @@ def searchs():
 
 @main.route('/process', methods=['GET', 'POST'])
 def searchprocess():
-    search_string = request.args.get('search_term')
+    search_string = request.args.get('search_term') # assumes a URL like http://localhost:5000/process?search_term=something
+                                                    # if you are using form data, you'd likely want to use request.form instead
     query = models.Mooch.query.filter_by(LastName=search_string).first()
-    def jsonify_mooches(mooches,query):
-        jsonified = []
-        for mooch in mooches:
-            data = vars(mooch)
-            mooch_dict = {}
-            for k, v in data.items():
-                if k != "_sa_instance_state":
-                    if isinstance(v, datetime.date):
-                        mooch_dict[k] = v.strftime("%m/%d/%Y")
-                    else:
-                        mooch_dict[k] = v
-            jsonified.append(mooch_dict)
-        return json.dumps(jsonified)
-    #return json.dumps(query)
-    #return jsonify(query)
+    if not query: # no results return empty list
+        return json.dumps([])
+    return query.json()
 
-    return jsonify_mooches(query)
+# use this function when you have a list of models.Mooch objects to return
+def jsonify_mooches(mooches):
+    jsonified = []
+    for mooch in mooches:
+        data = vars(mooch)
+        mooch_dict = {}
+        for k, v in data.items():
+            if k != "_sa_instance_state":
+                if isinstance(v, datetime.date):
+                    mooch_dict[k] = v.strftime("%m/%d/%Y")
+                else:
+                    mooch_dict[k] = v
+        jsonified.append(mooch_dict)
+    return json.dumps(jsonified)

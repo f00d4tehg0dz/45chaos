@@ -1,8 +1,9 @@
 from . import db
-from datetime import datetime
+from datetime import datetime, date
 from oauth2client.service_account import ServiceAccountCredentials
 from sqlalchemy.engine.reflection import Inspector
 import gspread
+import json
 
 
 TRUMP_INAUGURAL = datetime.strptime("01/20/2017", "%m/%d/%Y").date()
@@ -52,6 +53,16 @@ class Mooch(db.Model):
     Notes = db.Column(db.Text)
     Image = db.Column(db.String(64))
     Sources = db.Column(db.Text)
+
+    def json(self):
+        mooch_dict = {}
+        for k, v in vars(self).items():
+            if k != "_sa_instance_state":
+                if isinstance(v, date):
+                    mooch_dict[k] = v.strftime("%m/%d/%Y")
+                else:
+                    mooch_dict[k] = v
+        return json.dumps(mooch_dict)
 
 
 def check_database():
