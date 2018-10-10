@@ -14,6 +14,7 @@ from .. import models, db
 def index():
     return render_template("index.html")
 
+
 @main.route("/data", methods=["POST"])
 def data():
     table = DataTable(
@@ -40,6 +41,7 @@ def data():
     )
     return json.dumps(table.json())
 
+
 def perform_search(queryset, user_input):
     return queryset.filter(
         db.or_(
@@ -50,22 +52,26 @@ def perform_search(queryset, user_input):
             )
         )
 
+
 @main.route('/autocomplete', methods=['GET'])
 def autocomplete():
-    query = db.session.query(models.Mooch.LastName, models.Mooch.FirstName).order_by(models.Mooch.FirstName, models.Mooch.LastName).all()
+    query = db.session.query(
+            models.Mooch.LastName, models.Mooch.FirstName
+        ).order_by(
+            models.Mooch.FirstName, models.Mooch.LastName
+        ).all()
     return json.dumps(query)
+
 
 @main.route('/search', methods=['POST'])
 def searchprocess():
     search_string = request.form.get('search_term')
     query = models.Mooch.query.filter_by(LastName=search_string).first()
-
-    #query = db.session.query(models.Mooch.LastName, models.Mooch.FirstName, models.Mooch.Affiliation, models.Mooch.Position).order_by(models.Mooch.FirstName).first()
     if not query: # no results return empty list
         return json.dumps([])
     return query.json()
-    #return json.dumps(query) # return query.json()
 
-    # use this function when you have a list of models.Mooch objects to return
+
+# use this function when you have a list of models.Mooch objects to return
 def jsonify_mooches(mooches):
     return json.dumps([x.json() for x in mooches])
