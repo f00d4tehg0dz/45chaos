@@ -98,10 +98,10 @@
                 <h1>Departures and <br>Nominations </h1>
                 <p> Search for Trump administration departures </p>
 
-                <!-- <form role="search" class="form-inline justify-content-center" >
+                <form action="{{ url_for('main.searchprocess') }}" role="form" class="form-inline justify-content-center" method="post" enctype="application/json">
                     <div class="col-md-5 col-sm-8">
                         <div class="input-group">
-                            <input type="text" class="searchs form-control" id="search_box" placeholder="Type in a Name and Go!">
+                            <input type="text" class="searchs form-control" id="search_box" name="search_box" placeholder="Type in a Name and Go!">
 
                             <span class="input-group-btn">
           <button class="btn searchBtn btn-secondary" type="submit">Go!</button>
@@ -110,15 +110,7 @@
                         </div>
 
                     </div>
-                </form> -->
-                <form class="form-inline">
-
-  <div class="form-group">
-    <label class="sr-only" for="nameInput">Name</label>
-    <input type="text" class="form-control" id="search_box" placeholder="First Name">
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
+                </form>
 
             </div>
         </div>
@@ -280,141 +272,178 @@
     <script src="{{ url_for('static', filename='js/scripts.js', _external=True) }}"></script>
 
     <script>
-    $(document).ready(function() {
-        var fullList = [];
-        function loadFullList() {
-          $.getJSON('/search', function(data, status, xhr) {
-            for (var i = 0; i < data.length; i++) {
-              fullList.push(data[i][0]);
-            }
-          });
-        };
-        loadFullList();
-        $('#search_box').autocomplete({
-          source: fullList,
-        });
-        // $('form[role="search"]').submit(function(ev) {
+    $(document).ready(function()
+{
+  var fullList = [];
 
-        $('form').on('submit', function(event) {
+  function loadFullList()
+  {
+    $.getJSON('/autocomplete', function(data, status, xhr)
+    {
+      for (var i = 0; i < data.length; i++)
+      {
+        fullList.push(data[i][0]);
+      }
+    });
+  };
+  loadFullList();
+  $('#search_box').autocomplete(
+  {
+    source: fullList,
+  });
+  $('form[role="form"]').submit(function(ev)
+  {
+    var search_term = $('#search_box').val()
+    alert(search_term)
+    $.ajax(
+    {
+      type: "POST",
+      url: "/search",
+      data:
+      {
+        search_term: search_term,
+      },
+      success: function(response)
+      {
+        console.log(response);
+        $('#search_results').html('');
+        if ($(".sub-info:first").is(":hidden")) {
+      				$(".sub-info").slideDown("slow", function() {
+                $('#search_results').append('<div class="content">')
+                $('.content').append('<div class="politican-card">')
+                $('.politican-card').append('<div class="politician-f-info">')
+                $('.politician-f-info').append('<img />', {src:'/img/' + response.Image + '.JPG'})
+                $('.politican-card').append('<div class="politician-profile-info col-5 col-sm-4">')
+                $('.politician-profile-info.col-5.col-sm-4').append('<h1>' + response.FirstName + '</h1>')
+                $('.politician-profile-info.col-5.col-sm-4').append('<h2>' + response.Affiliation + '</h2>')
+                $('.politician-profile-info.col-5.col-sm-4').append('<h2>' + response.Position + '</h2>')
+                $('.politician-profile-info.col-5.col-sm-4').append('</div>')
+                $('.politician-profile-info.col-5.col-sm-4').after('<div class="politician-profile-info col-3 col-sm-2 hired-left">')
+                $('.politician-profile-info.col-3.col-sm-2.hired-left').append('<h2>' + response.Position + '</h2>')
+                $('.politician-profile-info.col-3.col-sm-2.hired-left').append('<h2>' + response.DateHired + '</h2>')
+                $('.politician-profile-info.col-3.col-sm-2.hired-left').append('<h3>' + response.DateLeft + '</h3>')
+                $('.politician-profile-info.col-3.col-sm-2.hired-left').append('</div>')
+                $('.politician-profile-info.col-3.col-sm-2.hired-left').after('<div class="politician-profile-info col-3 col-sm-2">')
+                $('.politician-profile-info.col-3.col-sm-2').append('<p class="days-trump">' + 'Days Under Trump:' + response.TrumpTime + '</p>' + '<p class="days-trump">' + 'Total Time' + response.TotalTime + '</p>' + '</div>' + '</div>')
+                $('.politician-profile-info.col-3.col-sm-2').after('<div class="badgescard">' + '<span class="bio">' + response.Notes + '</span>' + '</div>')
+                $('.politican-card').after('<h3 class="mooches-title">' + 'NUMBER OF MOOCHES' + response.MoochesTime + '!' + '</h3>')
+      				})
+      			} else {
 
-          var search_term = $('#search_box').val()
+      			}
 
-          alert(search_term)
-        		$.ajax({
-              dataType: 'json',
-                       contentType: 'application/json; charset=utf-8',
-                       data: JSON.stringify(search_term),
-
-        			type : 'POST',
-        			url : '/process',
-              success: function( data ) {
-                //figuring out whats getting sent back
-                 alert(JSON.stringify(data));
-              }
-        		})
-
-        		.done(function(data) {
-              
-        			if (data.error) {
-        				$('#errorAlert').text(data.error).show();
-        				$('#successAlert').hide();
-        			}
-        			else {
-        				// $('#successAlert').text(data.name).show();
-        				// $('#errorAlert').hide();
-                var res = "";
-							// create the html with results
-							for(i in data.results){
-								res += "<div>"+data.results[i]+"</div>";
-							}
-              alert(res)
-							$("#results").html(res);
-        			}
-
-        		});
-
-        		event.preventDefault();
-
-        	});
+      },
+      error: function(response)
+      {
+        console.log(response);
+      }
+    });
 
 
-        var dataTable = $('#depart-table').DataTable({
-        serverSide: true,
-        processing: true,
-        ajax: {
-          url: "{{ url_for('main.data') }}", // json datasource
-          type: "post", // method  , by default get
-          error: function() { // error handling
-            $(".departures-grid-error").html("");
-            $("#departures-grid").append('<tbody class="departures-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
-            $("#departures-grid_processing").css("display", "none");
-          }
-        },
-        scrollY: 600,
-        deferRender: true,
-        scroller: {
-          loadingIndicator: true
-        },
-        columns: [{
-          data: "Image"
-        }, {
-          data: "Name"
-        }, {
-          data: "Affiliation"
-        }, {
-          data: "Position"
-        }, {
-          data: "Hired"
-        }, {
-          data: "Left"
-        }, {
-          data: "Total Days"
-        }, {
-          data: "Under Trump"
-        }, {
-          data: "Mooches"
-        }, {
-          data: "Fired/Resign"
-        }, {
-          data: "Notes"
-        }],
-        "columnDefs": [{
-          "targets": 10,
-          "visible": false
-        }, {
-          type: 'natural-nohtml',
-          targets: 5
-        }, {
-          "targets": 11,
-          data: "Notes",
-          "render": function(data, type, full, meta) {
-            return '<button class="btn viewmore">view notes</button>'
-          }
-        }, {
-          "targets": 0,
-          "render": function(data) {
-            return '<img src="' + "{{ url_for('static', filename='img', _external=True) }}/" + data + '.JPG" width="80" >'
-          }
-        }]
-        });
-        //Add event listener for opening and closing details
-        $('#depart-table tbody').on('click', '.viewmore', function() {
-        var tr = $(this).closest('tr');
-        var row = dataTable.row(tr);
-        if (row.child.isShown()) {
-        // This row is already open - close it
-        row.child.hide();
-        // $('td[colspan=11]').removeClass('commentcard');
-        tr.removeClass('shown');
-        } else {
-        // Open this row
-        row.child(row.data()).show();
-        tr.addClass('shown');
-        tr.addClass('child');
-        $('td[colspan=11]').addClass('child');
-        }
-        });
-        });
+    event.preventDefault();
+  });
+  var dataTable = $('#depart-table').DataTable(
+  {
+    serverSide: true,
+    processing: true,
+    ajax:
+    {
+      url: "{{ url_for('main.data') }}", // json datasource
+      type: "post", // method  , by default get
+      error: function()
+      { // error handling
+        $(".departures-grid-error").html("");
+        $("#departures-grid").append('<tbody class="departures-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
+        $("#departures-grid_processing").css("display", "none");
+      }
+    },
+    scrollY: 600,
+    deferRender: true,
+    scroller:
+    {
+      loadingIndicator: true
+    },
+    columns: [
+    {
+      data: "Image"
+    },
+    {
+      data: "Name"
+    },
+    {
+      data: "Affiliation"
+    },
+    {
+      data: "Position"
+    },
+    {
+      data: "Hired"
+    },
+    {
+      data: "Left"
+    },
+    {
+      data: "Total Days"
+    },
+    {
+      data: "Under Trump"
+    },
+    {
+      data: "Mooches"
+    },
+    {
+      data: "Fired/Resign"
+    },
+    {
+      data: "Notes"
+    }],
+    "columnDefs": [
+    {
+      "targets": 10,
+      "visible": false
+    },
+    {
+      type: 'natural-nohtml',
+      targets: 5
+    },
+    {
+      "targets": 11,
+      data: "Notes",
+      "render": function(data, type, full, meta)
+      {
+        return '<button class="btn viewmore">view notes</button>'
+      }
+    },
+    {
+      "targets": 0,
+      "render": function(data)
+      {
+        return '<img src="' + "{{ url_for('static', filename='img', _external=True) }}/" + data + '.JPG" width="80" >'
+      }
+    }]
+  });
+  //Add event listener for opening and closing details
+  $('#depart-table tbody').on('click', '.viewmore', function()
+  {
+    var tr = $(this).closest('tr');
+    var row = dataTable.row(tr);
+    if (row.child.isShown())
+    {
+      // This row is already open - close it
+      row.child.hide();
+      // $('td[colspan=11]').removeClass('commentcard');
+      tr.removeClass('shown');
+    }
+    else
+    {
+      // Open this row
+      row.child(row.data()).show();
+      tr.addClass('shown');
+      tr.addClass('child');
+      $('td[colspan=11]').addClass('child');
+    }
+  });
+});
     </script>
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b37f2974aa8ebd0"></script>

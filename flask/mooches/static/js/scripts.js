@@ -14,40 +14,7 @@ $(document).ready(function() {
 		}, 700);
 		return false;
 	});
-	// === Searches Autocomplete === //
 
-	// $(function() {
-	// 	$(".searchs").autocomplete({
-	// 		source: 'search.php'
-	// 	});
-	// });
-	// $('form[role="search"]').submit(function(ev) {
-	// 	$(".date-info").hide();
-	// 	ev.preventDefault();
-	// 	// get the input value with:
-	// 	var search_term = $('#search_box').val().trim();
-	// 	$.ajax({
-	// 		type: "GET",
-	// 		url: 'search.php',
-	// 		data: {
-	// 			q: search_term
-	// 		},
-	// 		success: function(returnData) {
-	// 			//Blank the search_results div.
-	// 			$('#search_results').html('');
-	// 			if ($(".sub-info:first").is(":hidden")) {
-	// 				$('#search_results').html('');
-	// 				$("#search_results").html(returnData);
-	// 				$(".sub-info").slideDown("slow", function() {
-	// 					// $('.sub-info').css('padding', '5rem 0');
-	// 				})
-	// 			} else {
-	// 				$("#search_results").html(returnData);
-	// 				// $( ".sub-info" ).hide();
-	// 			}
-	// 		}
-	// 	});
-	// });
 	// === Date Find Selector === //
 	$('form[role="datefind"]').submit(function(ev) {
 		$('.sub-info:first').hide();

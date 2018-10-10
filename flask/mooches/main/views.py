@@ -50,20 +50,22 @@ def perform_search(queryset, user_input):
             )
         )
 
-@main.route('/search', methods=['GET'])
-def searchs():
-    query = db.session.query(models.Mooch.LastName, models.Mooch.FirstName).order_by(models.Mooch.FirstName).all()
+@main.route('/autocomplete', methods=['GET'])
+def autocomplete():
+    query = db.session.query(models.Mooch.LastName, models.Mooch.FirstName).order_by(models.Mooch.FirstName, models.Mooch.LastName).all()
     return json.dumps(query)
 
-@main.route('/process', methods=['GET', 'POST'])
+@main.route('/search', methods=['POST'])
 def searchprocess():
-    search_string = request.args.get('search_term') # assumes a URL like http://localhost:5000/process?search_term=something
-                                                    # if you are using form data, you'd likely want to use request.form instead
+    search_string = request.form.get('search_term')
     query = models.Mooch.query.filter_by(LastName=search_string).first()
+
+    #query = db.session.query(models.Mooch.LastName, models.Mooch.FirstName, models.Mooch.Affiliation, models.Mooch.Position).order_by(models.Mooch.FirstName).first()
     if not query: # no results return empty list
         return json.dumps([])
     return query.json()
+    #return json.dumps(query) # return query.json()
 
-# use this function when you have a list of models.Mooch objects to return
+    # use this function when you have a list of models.Mooch objects to return
 def jsonify_mooches(mooches):
     return json.dumps([x.json() for x in mooches])
