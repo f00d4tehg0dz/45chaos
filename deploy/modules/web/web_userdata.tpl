@@ -77,12 +77,12 @@ $${google_creds}
 EOF
 
 # checkout, build, and run flask app
-cd /opt/web/45chaos && git checkout zimmerman
+cd /opt/web/45chaos && git checkout ${git_branch}
 cat << EOF > /opt/web/docker-compose.yml
 version: '3'
 services:
   web:
-    build: ./45chaos/flask
+    build: ./45chaos/
     ports:
       - 5000:5000
     volumes:

@@ -6,6 +6,10 @@ variable "environment" {
   default = "dev"
 }
 
+variable "git_branch" {
+  default = "master"
+}
+
 variable "public_ip" {}
 
 data "aws_vpc" "main_vpc" {
@@ -54,6 +58,7 @@ data "template_file" "web_userdata" {
   vars {
     environment  = "${var.environment}"
     nginx_config = "${file("${path.module}/nginx-${var.environment}.conf")}"
+    git_branch   = "${var.git_branch}"
   }
 }
 

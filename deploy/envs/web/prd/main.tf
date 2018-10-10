@@ -14,8 +14,13 @@ variable "public_ip" {
   default = "52.36.226.246"
 }
 
+ariable "git_branch" {
+  default = "master"
+}
+
 module "web" {
   source      = "../../../modules/web"
   public_ip   = "${var.public_ip}"
   environment = "prd"
+  git_branch  = "${var.git_branch}"
 }
