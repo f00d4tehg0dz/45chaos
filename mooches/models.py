@@ -1,4 +1,5 @@
 from . import db
+from .spreadsheets import Scraper
 from datetime import datetime, date
 from oauth2client.service_account import ServiceAccountCredentials
 from sqlalchemy.engine.reflection import Inspector
@@ -130,19 +131,23 @@ def mooch_exists(mooch):
         return False
 
 
+#def get_spreadsheet_records():
+#
+#    """
+#    Return a mapping of all the spreadsheet records using HEAD_ROW as keys
+#    """
+#
+#    creds = ServiceAccountCredentials.from_json_keyfile_name(
+#        CREDENTIAL_FILE,
+#        SCOPE
+#    )
+#    gc = gspread.authorize(creds)
+#    wks = gc.open(WORKSHEET_NAME).sheet1
+#    return wks.get_all_records(head=HEAD_ROW)
+
 def get_spreadsheet_records():
-
-    """
-    Return a mapping of all the spreadsheet records using HEAD_ROW as keys
-    """
-
-    creds = ServiceAccountCredentials.from_json_keyfile_name(
-        CREDENTIAL_FILE,
-        SCOPE
-    )
-    gc = gspread.authorize(creds)
-    wks = gc.open(WORKSHEET_NAME).sheet1
-    return wks.get_all_records(head=HEAD_ROW)
+    scraper = Scraper()
+    return scraper.get_all_departures()
 
 
 def enumerate_records(records):
