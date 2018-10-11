@@ -1,21 +1,11 @@
 from . import db
 from .spreadsheets import Scraper
 from datetime import datetime, date
-from oauth2client.service_account import ServiceAccountCredentials
 from sqlalchemy.engine.reflection import Inspector
-import gspread
 import json
 
 
 TRUMP_INAUGURAL = datetime.strptime("01/20/2017", "%m/%d/%Y").date()
-
-SCOPE = [
-    "https://spreadsheets.google.com/feeds",
-    "https://www.googleapis.com/auth/drive"
-]
-CREDENTIAL_FILE = "client_secret.json"
-WORKSHEET_NAME = "Trump Gov Departures"
-HEAD_ROW = 4
 
 # Mapping of Database Columns to their spreadsheet equivalent
 UI_HEAD = {
@@ -130,20 +120,6 @@ def mooch_exists(mooch):
     else:
         return False
 
-
-#def get_spreadsheet_records():
-#
-#    """
-#    Return a mapping of all the spreadsheet records using HEAD_ROW as keys
-#    """
-#
-#    creds = ServiceAccountCredentials.from_json_keyfile_name(
-#        CREDENTIAL_FILE,
-#        SCOPE
-#    )
-#    gc = gspread.authorize(creds)
-#    wks = gc.open(WORKSHEET_NAME).sheet1
-#    return wks.get_all_records(head=HEAD_ROW)
 
 def get_spreadsheet_records():
     scraper = Scraper()
