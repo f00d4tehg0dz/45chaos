@@ -7,3 +7,6 @@ data.sqlite
 .terraform
 client_secret.json
 *.pyc
+*.jpg
+*.png
+*.gif
