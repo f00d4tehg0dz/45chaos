@@ -15,6 +15,11 @@ def index():
     return render_template("index.html")
 
 
+@main.route("/mooches")
+def mooches():
+    return render_template("mooches.html")
+
+
 @main.route("/data", methods=["POST"])
 def data():
     table = DataTable(
