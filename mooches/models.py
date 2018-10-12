@@ -4,7 +4,7 @@ from datetime import datetime, date
 from sqlalchemy.engine.reflection import Inspector
 import json
 
-
+scraper = Scraper()
 TRUMP_INAUGURAL = datetime.strptime("01/20/2017", "%m/%d/%Y").date()
 
 # Mapping of Database Columns to their spreadsheet equivalent
@@ -20,6 +20,37 @@ UI_HEAD = {
     "Notes": "Notes",
     "Image": "Technical stuff for the website (coming soon)"
 }
+
+
+FAILED_NOMINATIONS_HEAD = {}
+
+VACANCIES_HEAD = {}
+
+
+class Definition(db.Model):
+
+    """
+    Table definition for the mooches legend scraper
+    """
+
+    __tablename__ = "definitions"
+
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    Name = db.Column(db.String(64))
+    Definition = db.Column(db.Text)
+
+    def to_json():
+
+        """
+        Dumps all definitions to a single dict in json
+        Usage: return models.Definition.to_json()
+        """
+
+        legend_dict = {}
+        defs = Definition.query.all()
+        for item in defs:
+            legend_dict[item.Name] = item.Definition
+        return json.dumps(legend_dict)
 
 
 class Mooch(db.Model):
@@ -46,6 +77,13 @@ class Mooch(db.Model):
     Sources = db.Column(db.Text)
 
     def json(self):
+
+        """
+        Dumps a single moocher row to json
+        Usage: query = models.Mooch.query.first()
+               return query.json()
+        """
+
         mooch_dict = {}
         for k, v in vars(self).items():
             if k != "_sa_instance_state":
@@ -56,6 +94,29 @@ class Mooch(db.Model):
         return json.dumps(mooch_dict)
 
 
+class FailedNomination(db.Model):
+
+    __tablename__ = "failed_nominations"
+
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    LastName = db.Column(db.String(64))
+    FirstName = db.Column(db.String(64))
+    Affiliation = db.Column(db.String(64))
+    Position = db.Column(db.Text)
+    DateNominated = db.Column(db.Date)
+    DateRejected = db.Column(db.Date)
+    ReasonRejected = db.Column(db.Text)
+    Notes = db.Column(db.Text)
+    Sources = db.Column(db.Text)
+
+    @property
+    def TotalTime(self):
+        return (self.DateRejected - self.DateNominated).days
+
+    @property
+    def MoochesTime(self):
+        return float(round((self.TotalTime / 10), 2))
+
 def check_database():
 
     """
@@ -63,7 +124,9 @@ def check_database():
     """
 
     inspector = Inspector.from_engine(db.engine)
-    if "mooches_table" not in inspector.get_table_names():
+    tables = inspector.get_table_names()
+    if "mooches_table" not in tables or "definitions" not in tables \
+            or "failed_nominations" not in tables:
         print("Detected missing tables, running seed")
         seed()
 
@@ -76,9 +139,9 @@ def seed():
 
     db.drop_all()
     db.create_all()
-    records = get_spreadsheet_records()
-    db_objects = enumerate_records(records)
-    for obj in db_objects:
+    for obj in enumerate_departures():
+        db.session.add(obj)
+    for obj in enumerate_legend():
         db.session.add(obj)
     db.session.commit()
 
@@ -90,11 +153,12 @@ def update():
     """
 
     check_database()
-    records = get_spreadsheet_records()
-    db_objects = enumerate_records(records)
     new_records = []
-    for obj in db_objects:
+    for obj in enumerate_departures():
         if not mooch_exists(obj):
+            new_records.append(obj)
+    for obj in enumerate_legend():
+        if not definition_exists(obj):
             new_records.append(obj)
     if len(new_records) > 0:
         for obj in new_records:
@@ -104,36 +168,29 @@ def update():
         print("No mooches to update")
 
 
-def mooch_exists(mooch):
+def enumerate_legend():
 
     """
-    Check if an entry already exists in the database
+    Parse scraped legend into database objects
     """
 
-    query = Mooch.query.filter_by(
-        LastName=mooch.LastName,
-        FirstName=mooch.FirstName,
-        Position=mooch.Position
-    ).first()
-    if query:
-        return True
-    else:
-        return False
+    db_objects = []
+    for key, value in scraper.get_legend().items():
+        object = Definition()
+        object.Name = key
+        object.Definition = value.replace('"', '')
+        db_objects.append(object)
+    return db_objects
 
 
-def get_spreadsheet_records():
-    scraper = Scraper()
-    return scraper.get_all_departures()
-
-
-def enumerate_records(records):
+def enumerate_departures():
 
     """
     Parse scraped records into database objects
     """
 
     db_objects = []
-    for record in records:
+    for record in scraper.get_all_departures():
         object = Mooch()
         object.LastName = record[UI_HEAD["LastName"]]
         object.FirstName = record[UI_HEAD["FirstName"]]
@@ -155,6 +212,39 @@ def enumerate_records(records):
         object.Sources = "\n".join(sources)
         db_objects.append(object)
     return db_objects
+
+
+def definition_exists(definition):
+
+    """
+    check if a definition already exists in the database
+    """
+
+    query = Definition.query.filter_by(
+        Name=definition.Name,
+        Definition=definition.Definition
+    ).first()
+    if query:
+        return True
+    else:
+        return False
+
+
+def mooch_exists(mooch):
+
+    """
+    Check if an entry already exists in the database
+    """
+
+    query = Mooch.query.filter_by(
+        LastName=mooch.LastName,
+        FirstName=mooch.FirstName,
+        Position=mooch.Position
+    ).first()
+    if query:
+        return True
+    else:
+        return False
 
 
 def convert_date(dateStr):
