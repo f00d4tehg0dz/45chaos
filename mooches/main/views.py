@@ -70,7 +70,6 @@ def autocomplete():
 
 @main.route('/search', methods=['POST'])
 def searchprocess():
-    print(request.form)
     search_string = request.form.get('search_term')
     query = models.Mooch.query.filter_by(LastName=search_string).first()
     if not query: # no results return empty list
