@@ -223,6 +223,7 @@
             });
             // --- Search --- //
             $('form[role="form"]').submit(function(ev) {
+                ev.preventDefault();
                 var search_term = $('#search_box').val()
                 $.ajax({
                     type: "POST",
@@ -266,10 +267,9 @@
                     error: function(response) {
                     }
                   });
-                  event.preventDefault();
               });
             // --- Data Table --- //
-            var dataTable = $('#depart-table').DataTable({
+            var table = $('#depart-table').DataTable({
                 serverSide: true,
                 processing: true,
                 ajax: {
@@ -317,7 +317,6 @@
                     targets: 5
                 }, {
                     "targets": 11,
-                    data: "Notes",
                     "render": function(data, type, full, meta) {
                         return '<button class="btn viewmore">view notes</button>'
                     }
@@ -331,7 +330,7 @@
             // --- Add event listener for opening and closing details --- //
             $('#depart-table tbody').on('click', '.viewmore', function() {
                 var tr = $(this).closest('tr');
-                var row = dataTable.row(tr);
+                var row = table.row(tr);
                 if (row.child.isShown()) {
                     // This row is already open - close it
                     row.child.hide();
@@ -339,7 +338,8 @@
                     tr.removeClass('shown');
                 } else {
                     // Open this row
-                    row.child(row.data()).show();
+                    var notes = Object.values(row.data())[Object.values(row.data()).length - 1]
+                    row.child(notes).show();
                     tr.addClass('shown');
                     tr.addClass('child');
                     $('td[colspan=11]').addClass('child');
