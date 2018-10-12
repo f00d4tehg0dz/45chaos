@@ -52,7 +52,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <!--- Main Style --->
-    <link rel="stylesheet" href="css/main-min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main-min.css', _external=True) }}"/>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23840368-23"></script>
     <script>
@@ -70,7 +70,7 @@
 
 <body>
     <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
-        <a class="navbar-brand" href="{{ url_for('main.index') }}"><img src="./img/logo.png" width="50">
+        <a class="navbar-brand" href="{{ url_for('main.index') }}"><img src="{{ url_for('static', filename='img/logo.png', _external=True) }}" width="50">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -200,7 +200,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.js"></script>
 
-    <script src="js/scripts-min.js"></script>
+    <script src="{{ url_for('static', filename='js/scripts-min.js', _external=True) }}"></script>
 
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b37f2974aa8ebd0"></script>
