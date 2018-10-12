@@ -1,9 +1,6 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-
-
     <!--- Required meta tags --->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,17 +9,17 @@
     <meta name="author" content="@ImagineWorldas1">
     <!--- Facebook --->
     <meta property="og:locale" content="en_US" />
-    <meta property="og:url" content="https://45chaos.com" />
+    <meta property="og:url" content="{{ url_for('main.index') }}" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="The Chaos of Donald Trumps Presidencye" />
+    <meta property="og:title" content="The Chaos of Donald Trumps Presidency" />
     <meta property="og:description" content="A chronicle of the chaos of Donald Trump’s presidency, including lists of all the departures, failed nominations, and empty positions. Including a Mooch Calculator!" />
-    <meta property="og:image" content="https://45chaos.com/img/social.png" />
+    <meta property="og:image" content="{{ url_for('static', filename='img/social.png', _external=True) }}" />
     <!--- Twitter --->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:description" content="A chronicle of the chaos of Donald Trump’s presidency, including lists of all the departures, failed nominations, and empty positions. Including a Mooch Calculator!" />
     <meta name="twitter:title" content="The Chaos of Donald Trumps Presidency" />
-    <meta name="twitter:site" content="https://45chaos.com" />
-    <meta name="twitter:image" content="https://45chaos.com/img/social.png" />
+    <meta name="twitter:site" content="{{ url_for('main.index') }}" />
+    <meta name="twitter:image" content="{{ url_for('static', filename='img/social.png', _external=True) }}" />
     <meta name="twitter:creator" content="@ImagineWorldas1" />
     <!--- Fav --->
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="apple-touch-icon-57x57.png" />
@@ -55,7 +52,6 @@
     <!--- DataTables --->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.18/b-1.5.2/r-2.2.2/sc-1.5.0/datatables.min.css" />
 
-
     <!--- Main Style --->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css', _external=True) }}" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -72,10 +68,9 @@
     </script>
     <title>45 Chaos</title>
 </head>
-
 <body>
     <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
-        <a class="navbar-brand" href="https://45chaos.com"><img src="{{ url_for('static', filename='img/logo.png', _external=True) }}" width="50">
+        <a class="navbar-brand" href="{{ url_for('main.index') }}"><img src="{{ url_for('static', filename='img/logo.png', _external=True) }}" width="50">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -83,77 +78,56 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="https://45chaos.com">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ url_for('main.index') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://45chaos.com/mooches">Mooches</a>
+                    <a class="nav-link" href="{{ url_for('main.mooches') }}">Mooches</a>
                 </li>
             </ul>
         </div>
     </nav>
     <main role="main">
-
         <div class="jumbotron jumbotron-fluid image">
             <div class="container">
                 <h1>Departures and <br>Nominations </h1>
                 <p> Search for Trump administration departures </p>
-
                 <form action="{{ url_for('main.searchprocess') }}" role="form" class="form-inline justify-content-center" method="post" enctype="application/json">
                     <div class="col-md-5 col-sm-8">
                         <div class="input-group">
                             <input type="text" class="searchs form-control" id="search_box" name="search_box" placeholder="Type in a Name and Go!">
-
                             <span class="input-group-btn">
-          <button class="btn searchBtn btn-secondary" type="submit">Go!</button>
-        </span>
-
+                              <button class="btn searchBtn btn-secondary" type="submit">Go!</button>
+                            </span>
                         </div>
-
                     </div>
                 </form>
-
             </div>
         </div>
-        <!--- Jumbo --->
-
+        <!--- /Jumbo --->
     </main>
-    <!--- Main --->
-
+    <!--- /Main --->
     <section class="sub-info">
         <div class="container-fluid">
-
-
             <div class="row justify-content-center">
                 <div class="col-11 col-sm-12">
-
                     <div id="search_results">
-
-
-
                     </div>
                 </div>
             </div>
         </div>
-
-
     </section>
     <!--- Search Results--->
     <section class="table-information">
         <div class="container-fluid">
-
             <div class="row justify-content-center">
                 <div class="col-12">
                     <h1>Table of every departure</h1>
-
                     <div class="f-table">
                         <!--- Header --->
-                        <div class="number-tables"></div>
-
-
+                        <!-- <div class="number-tables"></div> -->
                         <table cellpadding="0" cellspacing="0" border="0" class="f-table-row table table-striped table-bordered" id="depart-table" width="100%">
                             <thead>
                                 <tr>
-
                                     <th>SORT BY</th>
                                     <th>Name</th>
                                     <th>Affliation</th>
@@ -169,47 +143,25 @@
                                 </tr>
                             </thead>
                         </table>
-
-
                     </div>
-                    <!---Column --->
-
-
-
-
-
+                    <!---/Column --->
                 </div>
             </div>
-            <!--- Table Container --->
+            <!--- /Table Container --->
     </section>
     <!--- Footer --->
     <footer class="page-footer font-small blue pt-4 mt-4">
-
-
         <div class="container-fluid text-center text-md-left">
-
-
             <div class="row">
-
-
                 <div class="offset-md-1 col-md-4 mt-md-0 mt-3">
-
-
                     <h5 class="text-uppercase">Information</h5>
                     <p>Data collected and organized by Adrienne Cobb</p>
-                    <p>Site Built by Adrian</p>
-
+                    <p>Site Built by Adrian & Avi</p>
                 </div>
                 <!--- Content --->
-
-
                 <hr class="clearfix w-100 d-md-none pb-3">
-
                 <div class="col-md-3 mb-md-0 mb-3">
-
-
                     <h5 class="text-uppercase">Data Curator Info!</h5>
-
                     <ul class="list-unstyled">
                         <li>
                             <a href="mailto:trumprussia0@gmail.com">Email Me!</a>
@@ -224,229 +176,178 @@
                             <a href="https://trumprussiablog.wordpress.com/contact/">Blog</a>
                         </li>
                     </ul>
-
                 </div>
-
                 <div class="col-md-3 mb-md-0 mb-3">
-
                     <h5 class="text-uppercase">Developer Contact</h5>
-
                     <ul class="list-unstyled">
                         <li>
                             <a href="mailto:adrianvfx@gmail.com">Email Me!</a>
-
-
+                        </li>
                     </ul>
-
                 </div>
                 <!--- Links --->
-
-
             </div>
-
-
         </div>
         <!--- Footer Links Container --->
-
-
         <div class="footer-copyright text-center py-3">© 2018 Copyright:
-            <a href="https://45chaos.com">45 Chaos</a>
+            <a href="{{ url_for('main.index') }}">45 Chaos</a>
         </div>
-        <!--- Copyright --->
-
+        <!--- /Copyright --->
     </footer>
-    <!--- Footer --->
+    <!--- /Footer --->
     <button class="btn to-the-top" title="Go to top"><i class="fas fa-angle-up"></i>Top</button>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.18/b-1.5.2/r-2.2.2/sc-1.5.0/datatables.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.19/sorting/natural.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
     <script src="{{ url_for('static', filename='js/scripts.js', _external=True) }}"></script>
-
     <script>
-    $(document).ready(function()
-{
-  var fullList = [];
-
-  function loadFullList()
-  {
-    $.getJSON('/autocomplete', function(data, status, xhr)
-    {
-      for (var i = 0; i < data.length; i++)
-      {
-        fullList.push(data[i][0]);
-      }
-    });
-  };
-  loadFullList();
-  $('#search_box').autocomplete(
-  {
-    source: fullList,
-  });
-  $('form[role="form"]').submit(function(ev)
-  {
-    var search_term = $('#search_box').val()
-    alert(search_term)
-    $.ajax(
-    {
-      type: "POST",
-      url: "/search",
-      data:
-      {
-        search_term: search_term,
-      },
-      success: function(response)
-      {
-        console.log(response);
-        $('#search_results').html('');
-        if ($(".sub-info:first").is(":hidden")) {
-      				$(".sub-info").slideDown("slow", function() {
-                $('#search_results').append('<div class="content">')
-                $('.content').append('<div class="politican-card">')
-                $('.politican-card').append('<div class="politician-f-info">')
-                $('.politician-f-info').append('<img />', {src:'/img/' + response.Image + '.JPG'})
-                $('.politican-card').append('<div class="politician-profile-info col-5 col-sm-4">')
-                $('.politician-profile-info.col-5.col-sm-4').append('<h1>' + response.FirstName + '</h1>')
-                $('.politician-profile-info.col-5.col-sm-4').append('<h2>' + response.Affiliation + '</h2>')
-                $('.politician-profile-info.col-5.col-sm-4').append('<h2>' + response.Position + '</h2>')
-                $('.politician-profile-info.col-5.col-sm-4').append('</div>')
-                $('.politician-profile-info.col-5.col-sm-4').after('<div class="politician-profile-info col-3 col-sm-2 hired-left">')
-                $('.politician-profile-info.col-3.col-sm-2.hired-left').append('<h2>' + response.Position + '</h2>')
-                $('.politician-profile-info.col-3.col-sm-2.hired-left').append('<h2>' + response.DateHired + '</h2>')
-                $('.politician-profile-info.col-3.col-sm-2.hired-left').append('<h3>' + response.DateLeft + '</h3>')
-                $('.politician-profile-info.col-3.col-sm-2.hired-left').append('</div>')
-                $('.politician-profile-info.col-3.col-sm-2.hired-left').after('<div class="politician-profile-info col-3 col-sm-2">')
-                $('.politician-profile-info.col-3.col-sm-2').append('<p class="days-trump">' + 'Days Under Trump:' + response.TrumpTime + '</p>' + '<p class="days-trump">' + 'Total Time' + response.TotalTime + '</p>' + '</div>' + '</div>')
-                $('.politician-profile-info.col-3.col-sm-2').after('<div class="badgescard">' + '<span class="bio">' + response.Notes + '</span>' + '</div>')
-                $('.politican-card').after('<h3 class="mooches-title">' + 'NUMBER OF MOOCHES' + response.MoochesTime + '!' + '</h3>')
-      				})
-      			} else {
-
-      			}
-
-      },
-      error: function(response)
-      {
-        console.log(response);
-      }
-    });
-
-
-    event.preventDefault();
-  });
-  var dataTable = $('#depart-table').DataTable(
-  {
-    serverSide: true,
-    processing: true,
-    ajax:
-    {
-      url: "{{ url_for('main.data') }}", // json datasource
-      type: "post", // method  , by default get
-      error: function()
-      { // error handling
-        $(".departures-grid-error").html("");
-        $("#departures-grid").append('<tbody class="departures-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
-        $("#departures-grid_processing").css("display", "none");
-      }
-    },
-    scrollY: 600,
-    deferRender: true,
-    scroller:
-    {
-      loadingIndicator: true
-    },
-    columns: [
-    {
-      data: "Image"
-    },
-    {
-      data: "Name"
-    },
-    {
-      data: "Affiliation"
-    },
-    {
-      data: "Position"
-    },
-    {
-      data: "Hired"
-    },
-    {
-      data: "Left"
-    },
-    {
-      data: "Total Days"
-    },
-    {
-      data: "Under Trump"
-    },
-    {
-      data: "Mooches"
-    },
-    {
-      data: "Fired/Resign"
-    },
-    {
-      data: "Notes"
-    }],
-    "columnDefs": [
-    {
-      "targets": 10,
-      "visible": false
-    },
-    {
-      type: 'natural-nohtml',
-      targets: 5
-    },
-    {
-      "targets": 11,
-      data: "Notes",
-      "render": function(data, type, full, meta)
-      {
-        return '<button class="btn viewmore">view notes</button>'
-      }
-    },
-    {
-      "targets": 0,
-      "render": function(data)
-      {
-        return '<img src="' + "{{ url_for('static', filename='img', _external=True) }}/" + data + '.JPG" width="80" >'
-      }
-    }]
-  });
-  //Add event listener for opening and closing details
-  $('#depart-table tbody').on('click', '.viewmore', function()
-  {
-    var tr = $(this).closest('tr');
-    var row = dataTable.row(tr);
-    if (row.child.isShown())
-    {
-      // This row is already open - close it
-      row.child.hide();
-      // $('td[colspan=11]').removeClass('commentcard');
-      tr.removeClass('shown');
-    }
-    else
-    {
-      // Open this row
-      row.child(row.data()).show();
-      tr.addClass('shown');
-      tr.addClass('child');
-      $('td[colspan=11]').addClass('child');
-    }
-  });
-});
+        $(document).ready(function() {
+          // --- AutoComplete --- //
+           var fullList = [];
+           function loadFullList() {
+                $.getJSON('/autocomplete', function(data, status, xhr) {
+                    for (var i = 0; i < data.length; i++) {
+                        fullList.push(data[i][0]);
+                    }
+                });
+            };
+            loadFullList();
+            $('#search_box').autocomplete({
+                source: fullList,
+            });
+            // --- Search --- //
+            $('form[role="form"]').submit(function(ev) {
+                ev.preventDefault();
+                var search_term = $('#search_box').val()
+                $.ajax({
+                    type: "POST",
+                    url: "/search",
+                    data: {
+                        search_term: search_term,
+                    },
+                    success: function(response) {
+                        var result = jQuery.parseJSON(response);
+                        $('#search_results').html('');
+                        var startDate = parseDate(result.DateHired)
+                        var endDate = parseDate(result.DateLeft)
+                        var numberofDays = calcDaysBetween(startDate, endDate)
+                        function parseDate(s){
+                            var parts = s.split('/')
+                            return new Date(parts[2], parts[0]-1, parts[1])
+                        }
+                        function calcDaysBetween(startDate, endDate){
+                            return (endDate-startDate)/(1000*60*60*24)
+                        }
+                        if ($(".sub-info:first").is(":hidden")) {
+                            $(".sub-info").slideDown("slow", function() {
+                                $('#search_results').append('<div class="content">')
+                                $('.content').append('<div class="politican-card">')
+                                $('.politican-card').append('<div class="politician-f-info">')
+                                $('.politician-f-info').append('<img src="' + "{{ url_for('static', filename='img', _external=True) }}/" + result.Image + '.JPG" width="80" >')
+                                $('.politician-f-info').append('<div class="politician-profile-info col-5 col-sm-4">')
+                                $('.politician-profile-info.col-5.col-sm-4').append('<h1>' + result.FirstName + '</h1>')
+                                $('.politician-profile-info.col-5.col-sm-4').append('<h2>' + result.Affiliation + '</h2>')
+                                $('.politician-profile-info.col-5.col-sm-4').append('<h2>' + result.Position + '</h2>')
+                                $('.politician-profile-info.col-5.col-sm-4').after('</div>' + '<div class="politician-profile-info col-3 col-sm-2 hired-left">')
+                                $('.politician-profile-info.col-3.col-sm-2.hired-left').append('<h3>' + result.DateHired + '</h3>' + '<h3>' + result.DateLeft + '</h3>')
+                                $('.politician-profile-info.col-3.col-sm-2.hired-left').after('</div>' + '<div class="politician-profile-info col-3 col-sm-4">')
+                                $('.politician-profile-info.col-3.col-sm-4').append('<p class="days-trump">' + 'Under Trump: ' + result.TrumpTime + '</p>' + '<p>' + 'Total Time ' + numberofDays + '</p>' + '</div>' + '</div>' + '</div>')
+                                //$('.politican-card').append('<div class="badgescard">' + '<span class="bio">' + result.Notes + '</span>' + '</div>')
+                                $('.politican-card').after('<h3 class="mooches-title">' + 'NUMBER OF MOOCHES ' + result.MoochesTime + '!' + '</h3>')
+                            })
+                        } else {
+                        }
+                    },
+                    error: function(response) {
+                    }
+                  });
+              });
+            // --- Data Table --- //
+            var table = $('#depart-table').DataTable({
+                serverSide: true,
+                processing: true,
+                ajax: {
+                    url: "{{ url_for('main.data') }}", // json datasource
+                    type: "post", // method  , by default get
+                    error: function() { // error handling
+                        $(".departures-grid-error").html("");
+                        $("#departures-grid").append('<tbody class="departures-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
+                        $("#departures-grid_processing").css("display", "none");
+                    }
+                },
+                scrollY: 600,
+                deferRender: true,
+                scroller: {
+                    loadingIndicator: true
+                },
+                columns: [{
+                    data: "Image"
+                }, {
+                    data: "Name"
+                }, {
+                    data: "Affiliation"
+                }, {
+                    data: "Position"
+                }, {
+                    data: "Hired"
+                }, {
+                    data: "Left"
+                }, {
+                    data: "Total Days"
+                }, {
+                    data: "Under Trump"
+                }, {
+                    data: "Mooches"
+                }, {
+                    data: "Fired/Resign"
+                }, {
+                    data: "Notes"
+                }],
+                "columnDefs": [{
+                    "targets": 10,
+                    "visible": false
+                }, {
+                    type: 'natural-nohtml',
+                    targets: 5
+                }, {
+                    "targets": 11,
+                    "render": function(data, type, full, meta) {
+                        return '<button class="btn viewmore">view notes</button>'
+                    }
+                }, {
+                    "targets": 0,
+                    "render": function(data) {
+                        return '<img src="' + "{{ url_for('static', filename='img', _external=True) }}/" + data + '.JPG" width="80" >'
+                    }
+                }]
+            });
+            // --- Add event listener for opening and closing details --- //
+            $('#depart-table tbody').on('click', '.viewmore', function() {
+                var tr = $(this).closest('tr');
+                var row = table.row(tr);
+                if (row.child.isShown()) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    // $('td[colspan=11]').removeClass('commentcard');
+                    tr.removeClass('shown');
+                } else {
+                    // Open this row
+                    var notes = Object.values(row.data())[Object.values(row.data()).length - 1]
+                    row.child(notes).show();
+                    tr.addClass('shown');
+                    tr.addClass('child');
+                    $('td[colspan=11]').addClass('child');
+                }
+            });
+        });
     </script>
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b37f2974aa8ebd0"></script>
 </body>
-
 </html>
