@@ -11,17 +11,17 @@
     <meta name="author" content="@ImagineWorldas1">
     <!--- Facebook --->
     <meta property="og:locale" content="en_US" />
-    <meta property="og:url" content="https://45chaos.com" />
+    <meta property="og:url" content="{{ url_for('main.index') }}" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="The Chaos of Donald Trumps Presidency" />
     <meta property="og:description" content="A chronicle of the chaos of Donald Trump’s presidency, including lists of all the departures, failed nominations, and empty positions. Including a Mooch Calculator!" />
-    <meta property="og:image" content="https://45chaos.com/img/social.png" />
+    <meta property="og:image" content="{{ url_for('static', filename='img/social.png', _external=True) }}" />
     <!--- Twitter --->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:description" content="A chronicle of the chaos of Donald Trump’s presidency, including lists of all the departures, failed nominations, and empty positions. Including a Mooch Calculator!" />
     <meta name="twitter:title" content="The Chaos of Donald Trumps Presidency" />
-    <meta name="twitter:site" content="https://45chaos.com" />
-    <meta name="twitter:image" content="https://45chaos.com/img/social.png" />
+    <meta name="twitter:site" content="{{ url_for('main.index') }}" />
+    <meta name="twitter:image" content="{{ url_for('static', filename='img/social.png', _external=True) }}" />
     <meta name="twitter:creator" content="@ImagineWorldas1" />
     <!--- Fav --->
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="apple-touch-icon-57x57.png" />
@@ -70,7 +70,7 @@
 
 <body>
     <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
-        <a class="navbar-brand" href="https://45chaos.com"><img src="./img/logo.png" width="50">
+        <a class="navbar-brand" href="{{ url_for('main.index') }}"><img src="./img/logo.png" width="50">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -78,10 +78,10 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item ">
-                    <a class="nav-link" href="https://45chaos.com">Home </a>
+                    <a class="nav-link" href="{{ url_for('main.index') }}">Home </a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="https://45chaos.com/mooches">Mooches<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ url_for('main.mooches') }}">Mooches<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>
@@ -185,7 +185,7 @@
         <!--- Footer Links Container --->
 
         <div class="footer-copyright text-center py-3">© 2018 Copyright:
-            <a href="https://45chaos.com">45 Chaos</a>
+            <a href="{{ url_for('main.index') }}">45 Chaos</a>
         </div>
         <!--- Copyright --->
 

@@ -15,6 +15,11 @@ def index():
     return render_template("index.html")
 
 
+@main.route("/mooches")
+def mooches():
+    return render_template("mooches.html")
+
+
 @main.route("/data", methods=["POST"])
 def data():
     table = DataTable(
@@ -65,7 +70,7 @@ def autocomplete():
 
 @main.route('/search', methods=['POST'])
 def searchprocess():
-    search_string = request.form.get('search_term')
+    search_string = request.form.get('search_box')
     query = models.Mooch.query.filter_by(LastName=search_string).first()
     if not query: # no results return empty list
         return json.dumps([])
