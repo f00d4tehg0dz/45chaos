@@ -14,7 +14,7 @@ variable "public_ip" {
   default = "52.36.226.246"
 }
 
-ariable "git_branch" {
+variable "git_branch" {
   default = "master"
 }
 
