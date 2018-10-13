@@ -15,6 +15,12 @@ def index():
     return render_template("index.html")
 
 
+@main.route("/keys")
+def keys():
+    definitions = models.Definition.query.all()
+    return render_template("keys.html", definitions=definitions)
+
+
 @main.route("/mooches")
 def mooches():
     return render_template("mooches.html")

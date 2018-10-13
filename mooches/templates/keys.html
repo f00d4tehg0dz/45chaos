@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main role="main">
+    <div class="jumbotron jumbotron-fluid image">
+        <div class="container">
+            <h1>Table Definitions</h1>
+        </div>
+    </div>
+</main>
+<section class="table-information">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="f-table">
+                    <!--- Header --->
+                    <!-- <div class="number-tables"></div> -->
+                    <table cellpadding="0" cellspacing="0" border="0" class="f-table-row table table-striped table-bordered" id="depart-table" width="100%">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Term</th>
+                                <th>Definition</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        {% for def in definitions %}
+                        <tr>
+                          <td></td>
+                          <td>{{ def.Name }}</td>
+                          <td>{{ def.Definition }}</td>
+                          <td></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <!---/Column --->
+            </div>
+        </div>
+        <!--- /Table Container --->
+</section>
+{% endblock %}
