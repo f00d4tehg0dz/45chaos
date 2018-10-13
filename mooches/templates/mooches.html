@@ -42,69 +42,7 @@
 
     </section>
     <!--- Calculator Information--->
-    <!--- Footer --->
-    <footer class="page-footer font-small blue pt-4">
-
-        <div class="container-fluid text-center text-md-left">
-
-            <div class="row">
-
-                <div class="offset-md-1 col-md-4 mt-md-0 mt-3">
-
-                    <h5 class="text-uppercase">Information</h5>
-                    <p>Data collected and organized by Adrienne Cobb</p>
-                    <p>Site Built by Adrian & Avi</p>
-
-                </div>
-                <!--- Content --->
-                <hr class="clearfix w-100 d-md-none pb-3">
-
-                <div class="col-md-3 mb-md-0 mb-3">
-
-                    <h5 class="text-uppercase">Data Curator Info!</h5>
-
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="mailto:trumprussia0@gmail.com">Email Me!</a>
-                        </li>
-                        <li>
-                            <a href="https://twitter.com/ImagineWorldas1">Twitter</a>
-                        </li>
-                        <li>
-                            <a href="https://www.reddit.com/user/rusticgorilla">Reddit</a>
-                        </li>
-                        <li>
-                            <a href="https://trumprussiablog.wordpress.com/contact/">Blog</a>
-                        </li>
-                    </ul>
-
-                </div>
-
-                <div class="col-md-3 mb-md-0 mb-3">
-
-                    <h5 class="text-uppercase">Developer Contact</h5>
-
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="mailto:adrianvfx@gmail.com">Email Me!</a>
-
-                    </ul>
-
-                </div>
-                <!--- Links --->
-
-            </div>
-
-        </div>
-        <!--- Footer Links Container --->
-
-        <div class="footer-copyright text-center py-3">© 2018 Copyright:
-            <a href="{{ url_for('main.index') }}">45 Chaos</a>
-        </div>
-        <!--- Copyright --->
-
-    </footer>
-    <!--- Footer --->
+    {% block scripts %}
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -113,9 +51,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.js"></script>
-
     <script src="{{ url_for('static', filename='js/scripts-min.js', _external=True) }}"></script>
 
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b37f2974aa8ebd0"></script>
+    {% endblock %}
 {% endblock %}

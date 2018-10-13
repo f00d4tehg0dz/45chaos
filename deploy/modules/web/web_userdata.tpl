@@ -17,7 +17,7 @@ yum -y install \
     jq
 
 # install nginx
-amazon-linux-extras install nginx1.12
+amazon-linux-extras install -y nginx1.12
 
 # install docker compose
 pip3 install docker-compose

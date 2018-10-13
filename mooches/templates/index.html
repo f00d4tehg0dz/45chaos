@@ -63,63 +63,6 @@
             </div>
             <!--- /Table Container --->
     </section>
-    <!--- Footer --->
-    <footer class="page-footer font-small blue pt-4 mt-4">
-        <div class="container-fluid text-center text-md-left">
-            <div class="row">
-                <div class="offset-md-1 col-md-4 mt-md-0 mt-3">
-                    <h5 class="text-uppercase">Information</h5>
-                    <p>Data collected and organized by Adrienne Cobb</p>
-                    <p>Site Built by Adrian & Avi</p>
-                </div>
-                <!--- Content --->
-                <hr class="clearfix w-100 d-md-none pb-3">
-                <div class="col-md-3 mb-md-0 mb-3">
-                    <h5 class="text-uppercase">Data Curator Info!</h5>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="mailto:trumprussia0@gmail.com">Email Me!</a>
-                        </li>
-                        <li>
-                            <a href="https://twitter.com/ImagineWorldas1">Twitter</a>
-                        </li>
-                        <li>
-                            <a href="https://www.reddit.com/user/rusticgorilla">Reddit</a>
-                        </li>
-                        <li>
-                            <a href="https://trumprussiablog.wordpress.com/contact/">Blog</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-3 mb-md-0 mb-3">
-                    <h5 class="text-uppercase">Developer Contact</h5>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="mailto:adrianvfx@gmail.com">Email Me!</a>
-                        </li>
-                    </ul>
-                </div>
-                <!--- Links --->
-            </div>
-        </div>
-        <!--- Footer Links Container --->
-        <div class="footer-copyright text-center py-3">© 2018 Copyright:
-            <a href="{{ url_for('main.index') }}">45 Chaos</a>
-        </div>
-        <!--- /Copyright --->
-    </footer>
-    <!--- /Footer --->
-    <button class="btn to-the-top" title="Go to top"><i class="fas fa-angle-up"></i>Top</button>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.18/b-1.5.2/r-2.2.2/sc-1.5.0/datatables.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.19/sorting/natural.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='js/scripts.js', _external=True) }}"></script>
     <script>
         $(document).ready(function() {
           // --- AutoComplete --- //
@@ -261,6 +204,4 @@
             });
         });
     </script>
-    <!-- Go to www.addthis.com/dashboard to customize your tools -->
-    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b37f2974aa8ebd0"></script>
 {% endblock %}
