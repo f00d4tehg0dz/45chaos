@@ -19,7 +19,7 @@ variable "public_ip" {
 }
 
 variable "git_branch" {
-  default = "master"
+  default = "develop"
 }
 
 module "web" {
