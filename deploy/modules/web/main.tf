@@ -64,7 +64,7 @@ data "template_file" "web_userdata" {
 
 resource "aws_instance" "web" {
   ami                  = "${data.aws_ami.amzn_linux2.id}"
-  instance_type        = "t2.medium"
+  instance_type        = "t2.micro"
   key_name             = "development"
   security_groups      = ["${data.aws_security_group.web_sg.id}"]
   subnet_id            = "${data.aws_subnet.public_subnet.id}"

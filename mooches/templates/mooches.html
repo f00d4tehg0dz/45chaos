@@ -1,88 +1,5 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-
-    <!--- Required meta tags --->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="A chronicle of the chaos of Donald Trump’s presidency, including lists of all the departures, failed nominations, and empty positions. Including a Mooch Calculator!" />
-    <meta name="keywords" content="white house resignations,EPA resignation, EPA firing, State Department empty, White house firing, White house resignation, Advisory Council disbanded, advisory council resignation, Trump nominees, mooch calculator, moochs calculator, total mooch, mooch, 45chaos, ">
-    <meta name="author" content="@ImagineWorldas1">
-    <!--- Facebook --->
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:url" content="{{ url_for('main.index') }}" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="The Chaos of Donald Trumps Presidency" />
-    <meta property="og:description" content="A chronicle of the chaos of Donald Trump’s presidency, including lists of all the departures, failed nominations, and empty positions. Including a Mooch Calculator!" />
-    <meta property="og:image" content="{{ url_for('static', filename='img/social.png', _external=True) }}" />
-    <!--- Twitter --->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:description" content="A chronicle of the chaos of Donald Trump’s presidency, including lists of all the departures, failed nominations, and empty positions. Including a Mooch Calculator!" />
-    <meta name="twitter:title" content="The Chaos of Donald Trumps Presidency" />
-    <meta name="twitter:site" content="{{ url_for('main.index') }}" />
-    <meta name="twitter:image" content="{{ url_for('static', filename='img/social.png', _external=True) }}" />
-    <meta name="twitter:creator" content="@ImagineWorldas1" />
-    <!--- Fav --->
-    <link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename='favico/apple-icon-57x57.png', _external=True) }}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{{ url_for('static', filename='favico/apple-icon-60x60.png', _external=True) }}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='favico/apple-icon-72x72.png', _external=True) }}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='favico/apple-icon-76x76.png', _external=True) }}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename='favico/apple-icon-114x114.png', _external=True) }}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('static', filename='favico/apple-icon-120x120.png', _external=True) }}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='favico/apple-icon-144x144.png', _external=True) }}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename='favico/apple-icon-152x152.png', _external=True) }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favico/apple-icon-180x180.png', _external=True) }}">
-    <link rel="icon" type="image/png" sizes="192x192"  href="{{ url_for('static', filename='favico/android-icon-192x192.png', _external=True) }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favico/favicon-32x32.png', _external=True) }}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='favico/favicon-96x96.png', _external=True) }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favico/favicon-16x16.png', _external=True) }}">
-    <link rel="manifest" href="{{ url_for('static', filename='favico/manifest.json', _external=True) }}">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="{{ url_for('static', filename='favico/ms-icon-144x144.png', _external=True) }}">
-    <meta name="theme-color" content="#ffffff">
-
-    <!--- Fonts --->
-    <link href="https://fonts.googleapis.com/css?family=ATitillium+Web:200,400,900|Fjalla+One|Open+Sans:100,200,300,400" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <!--- Font Awesome --->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <!--- Main Style --->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main-min.css', _external=True) }}"/>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23840368-23"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'UA-23840368-23');
-    </script>
-
-    <title>45 Chaos</title>
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
-        <a class="navbar-brand" href="{{ url_for('main.index') }}"><img src="{{ url_for('static', filename='img/logo.png', _external=True) }}" width="50">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item ">
-                    <a class="nav-link" href="{{ url_for('main.index') }}">Home </a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ url_for('main.mooches') }}">Mooches<span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+{% extends "base.html" %}
+{% block content %}
     <main role="main">
 
         <div class="jumbotron jumbotron-fluid shade">
@@ -201,6 +118,4 @@
 
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b37f2974aa8ebd0"></script>
-</body>
-
-</html>
+{% endblock %}
