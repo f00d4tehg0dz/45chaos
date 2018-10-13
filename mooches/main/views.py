@@ -17,7 +17,7 @@ def index():
 
 @main.route("/keys")
 def keys():
-    definitions = models.Definition.query.all()
+    definitions = models.Definition.query.order_by(models.Definition.Name).all()
     return render_template("keys.html", definitions=definitions)
 
 
