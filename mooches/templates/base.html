@@ -1,20 +1,24 @@
 <!doctype html>
 <html lang="en">
+
   <head>
 
     {% block head %}
 
       {% include "head.html" %}
       <title>{% block title %}{% endblock %} 45 Chaos</title>
-      
+
     {% endblock %}
 
   </head>
+
   <body>
 
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
     {% block navbar %}
       {% include "navbar.html" %}
     {% endblock %}
+    </nav>
 
     {% block scripts %}
       {% include "base_scripts.html" %}
@@ -23,11 +27,12 @@
     {% block content %}
     {% endblock %}
 
+    <footer class="page-footer font-small blue pt-4 mt-4">
     {% block footer %}
-    <!--- Footer --->
       {% include "footer.html" %}
-    <!--- /Footer --->
     {% endblock %}
+    </footer>
 
   </body>
+
 </html>
