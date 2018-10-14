@@ -24,7 +24,7 @@ class StatCollector(object):
             total = 0
             for mooch in moochers:
                 total += mooch.TrumpTime
-            return round(float(total/len(moochers)), 2)
+        return round(float(total/len(moochers)), 2)
 
     def get_leave_type_stats(self):
         with self.localContext.app_context():
@@ -35,7 +35,7 @@ class StatCollector(object):
                     leaveTypes[mooch.LeaveType] = 1
                 else:
                     leaveTypes[mooch.LeaveType] += 1
-            return leaveTypes
+        return leaveTypes
 
     def get_average_trump_hire_time(self):
         with self.localContext.app_context():
@@ -45,7 +45,7 @@ class StatCollector(object):
             total = 0
             for mooch in moochers:
                 total += mooch.TrumpTime
-            return round(float(total/len(moochers)), 2)
+        return round(float(total/len(moochers)), 2)
 
     def get_average_rollover_time(self):
         with self.localContext.app_context():
@@ -55,4 +55,4 @@ class StatCollector(object):
             total = 0
             for mooch in moochers:
                 total += mooch.TrumpTime
-            return round(float(total/len(moochers)), 2)
+        return round(float(total/len(moochers)), 2)
