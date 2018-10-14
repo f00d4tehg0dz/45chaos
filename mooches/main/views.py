@@ -7,8 +7,9 @@ import datetime
 import json
 
 from . import main
-from .. import models, db
+from .. import models, db, stats
 
+collector = stats.StatCollector()
 
 @main.route("/")
 def index():
