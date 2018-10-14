@@ -26,6 +26,17 @@ def mooches():
     return render_template("mooches.html")
 
 
+@main.route("/data.php", methods=["POST"])
+def mooch_calc():
+    today = datetime.datetime.today()
+    calcDate = datetime.datetime.strptime(
+        request.form.get("df"),
+        "%Y-%m-%d"
+    )
+    totalMooches = str(round(float((today - calcDate).days / 10), 2))
+    return '<h3 class="mooches-title">That was %s Mooches ago!</h3>' % totalMooches
+
+
 @main.route("/data", methods=["POST"])
 def data():
     table = DataTable(
