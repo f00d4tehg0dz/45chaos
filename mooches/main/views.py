@@ -13,7 +13,8 @@ collector = stats.StatCollector()
 
 @main.route("/")
 def index():
-    return render_template("index.html")
+    totalDepartures = len(models.Mooch.query.all())
+    return render_template("index.html", total=totalDepartures)
 
 
 @main.route("/keys")
