@@ -166,15 +166,20 @@
                     data: "Fired/Resign"
                 }, {
                     data: "Notes"
+                }, {
+                    data: "Sources"
                 }],
                 "columnDefs": [{
                     "targets": 10,
                     "visible": false
                 }, {
+                    "targets": 11,
+                    "visible": false
+                }, {
                     type: 'natural-nohtml',
                     targets: 5
                 }, {
-                    "targets": 11,
+                    "targets": 12,
                     "render": function(data, type, full, meta) {
                         return '<button class="btn viewmore">view notes</button>'
                     }
@@ -209,8 +214,18 @@
                     tr.removeClass('shown');
                 } else {
                     // Open this row
-                    var notes = Object.values(row.data())[Object.values(row.data()).length - 1]
-                    row.child(notes).show();
+                    var notes = Object.values(row.data())[Object.values(row.data()).length - 2]
+                    var sources = (Object.values(row.data())[Object.values(row.data()).length - 1]).split("\n")
+                    sourceLength = sources.length
+                    var sourceString = ""
+                    if (sourceLength == 1) {
+                      sourceString += '<a href="' + sources[0] + '" target="_blank">' + sources[0] + '</a><br />'
+                    } else {
+                      for (var i = 0; i < sourceLength; i++) {
+                        sourceString += '<a href="' + sources[i] + '" target="_blank">' + sources[i] + '</a><br />'
+                      }
+                    }
+                    row.child('<p>' + notes + '<br />' + sourceString + '</p>').show();
                     tr.addClass('shown');
                     tr.addClass('child');
                     $('td[colspan=11]').addClass('child');

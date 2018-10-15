@@ -69,7 +69,8 @@ def data():
             ("Under Trump", "TrumpTime", lambda i: "  {}  ".format(models.trumpTime(i.DateHired, i.DateLeft))),
             ("Mooches", "MoochesTime"),
             ("Fired/Resign", "LeaveType"),
-            ("Notes")
+            ("Notes"),
+            ("Sources")
         ]
     )
     table.searchable(
