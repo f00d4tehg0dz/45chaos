@@ -8,7 +8,24 @@ class StatCollector(object):
     def __init__(self):
         self.localContext, self.config = bootstrap_app(no_thread=True)
 
-    def get_affiliation_stats(self, refresh_departures=True):
+    def get_average_per_day_str(self):
+        totalTrumpDays = (datetime.today().date() - TRUMP_INAUGURAL).days
+        totalDepartures = len(models.Mooch.query.all())
+        perDay = 0
+        dayUnit = 1
+        while perDay < 1:
+            perDay = round(
+                float(
+                    (totalDepartures / totalTrumpDays) * dayUnit
+                ), 2)
+            if perDay < 1:
+                dayUnit += 1
+        if dayUnit == 1:
+            return "%s people per day" % perDay
+        else:
+            return "%s people every %s days" % (perDay, dayUnit)
+
+    def get_affiliation_stats(self):
         affiliations = {}
         with self.localContext.app_context():
             for mooch in models.Mooch.query.all():
