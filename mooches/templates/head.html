@@ -6,11 +6,13 @@
 <meta name="author" content="@ImagineWorldas1">
 <!--- Facebook --->
 <meta property="og:locale" content="en_US" />
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="628">
 <meta property="og:url" content="{{ url_for('main.index') }}" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="The Chaos of Donald Trumps Presidency" />
 <meta property="og:description" content="A chronicle of the chaos of Donald Trump’s presidency, including lists of all the departures, failed nominations, and empty positions. Including a Mooch Calculator!" />
-<meta property="og:image" content="{{ url_for('static', filename='img/social.png', _external=True) }}" />
+<meta property="og:image" content="{{ url_for('static', filename='img/og-image.jpg', _external=True) }}" />
 <!--- Twitter --->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:description" content="A chronicle of the chaos of Donald Trump’s presidency, including lists of all the departures, failed nominations, and empty positions. Including a Mooch Calculator!" />
@@ -19,23 +21,15 @@
 <meta name="twitter:image" content="{{ url_for('static', filename='img/social.png', _external=True) }}" />
 <meta name="twitter:creator" content="@ImagineWorldas1" />
 <!--- Fav --->
-<link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename='favico/apple-icon-57x57.png', _external=True) }}">
-<link rel="apple-touch-icon" sizes="60x60" href="{{ url_for('static', filename='favico/apple-icon-60x60.png', _external=True) }}">
-<link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='favico/apple-icon-72x72.png', _external=True) }}">
-<link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='favico/apple-icon-76x76.png', _external=True) }}">
-<link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename='favico/apple-icon-114x114.png', _external=True) }}">
-<link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('static', filename='favico/apple-icon-120x120.png', _external=True) }}">
-<link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='favico/apple-icon-144x144.png', _external=True) }}">
-<link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename='favico/apple-icon-152x152.png', _external=True) }}">
-<link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favico/apple-icon-180x180.png', _external=True) }}">
-<link rel="icon" type="image/png" sizes="192x192"  href="{{ url_for('static', filename='favico/android-icon-192x192.png', _external=True) }}">
-<link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favico/favicon-32x32.png', _external=True) }}">
-<link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='favico/favicon-96x96.png', _external=True) }}">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="{{ url_for('static', filename='favico/apple-touch-icon.png', _external=True) }}">
 <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favico/favicon-16x16.png', _external=True) }}">
-<link rel="manifest" href="{{ url_for('static', filename='favico/manifest.json', _external=True) }}">
-<meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage" content="{{ url_for('static', filename='favico/ms-icon-144x144.png', _external=True) }}">
-<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favico/favicon-32x32.png', _external=True) }}">
+<link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='favico/android-chrome-96x96.png', _external=True) }}">
+<link rel="manifest" href="{{ url_for('static', filename='favico/site.webmanifest', _external=True) }}">
+<link rel="mask-icon" href="{{ url_for('static', filename='favico/safari-pinned-tab.svg' color='#0a3356', _external=True) }}">
+<meta name="msapplication-TileColor" content="#0a3356">
+<meta name="theme-color" content="#0a3356">
+<meta name="msapplication-TileImage" content="{{ url_for('static', filename='favico/mstile-150x150.png', _external=True) }}">
 
 <!--- Fonts --->
 <link href="https://fonts.googleapis.com/css?family=ATitillium+Web:200,400,900|Fjalla+One|Open+Sans:100,200,300,400" rel="stylesheet">
