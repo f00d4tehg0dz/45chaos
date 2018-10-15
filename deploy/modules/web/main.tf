@@ -80,7 +80,8 @@ resource "aws_instance" "web" {
   }
 
   lifecycle {
-    ignore_changes = ["security_groups"]
+    ignore_changes        = ["security_groups"]
+    create_before_destroy = true
   }
 }
 
