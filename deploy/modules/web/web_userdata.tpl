@@ -71,15 +71,16 @@ database_name: chaos
 EOF
 
 # checkout, build, and run flask app
-cd /opt/web/45chaos && git checkout ${git_branch}
+cd /opt/web/45chaos && sudo -u ec2-user git checkout ${git_branch}
+cd /opt/web/45chaos && docker build . -t 45chaos
 cat << EOF > /opt/web/docker-compose.yml
 version: '3'
 services:
   web:
-    build: ./45chaos/
+    image: 45chaos:latest
     ports:
       - 5000:5000
     volumes:
       - /opt/web/config.yml:/opt/web/config.yml
 EOF
-cd /opt/web && docker-compose up -d
+cd /opt/web && /usr/local/bin/docker-compose up -d
