@@ -27,6 +27,18 @@ def mooches():
     return render_template("mooches.html")
 
 
+@main.route("/stats")
+def stats():
+    return render_template(
+        "stats.html",
+        definitions=models.Definition.to_dict(),
+        affiliations=collector.get_affiliation_stats(),
+        leave_types=collector.get_leave_type_stats(),
+        avg_trump_hire_time=collector.get_average_trump_hire_time(),
+        avg_rollover_time=collector.get_average_rollover_time()
+    )
+
+
 @main.route("/data.php", methods=["POST"])
 def mooch_calc():
     today = datetime.datetime.today()

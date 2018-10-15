@@ -46,12 +46,14 @@ class Definition(db.Model):
         Usage: return models.Definition.to_json()
         """
 
+        return json.dumps(Definition.to_dict())
+
+    def to_dict():
         legend_dict = {}
         defs = Definition.query.all()
         for item in defs:
             legend_dict[item.Name] = item.Definition
-        return json.dumps(legend_dict)
-
+        return legend_dict
 
 class Mooch(db.Model):
 

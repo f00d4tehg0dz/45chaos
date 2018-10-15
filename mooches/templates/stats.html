@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main role="main">
+    <div class="jumbotron jumbotron-fluid image">
+        <div class="container">
+            <h1>Mooch Stats</h1>
+        </div>
+    </div>
+</main>
+<section class="table-information">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="f-table">
+                    <!--- Header --->
+                    <!-- <div class="number-tables"></div> -->
+                    <table cellpadding="0" cellspacing="0" border="0" class="f-table-row table table-striped table-bordered" id="depart-table" width="100%">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Statistic</th>
+                                <th>Value</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Total Voluntary Resignations</td>
+                                <td>{{ leave_types["R"] }}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Total Resignations Under Pressure</td>
+                                <td>{{ leave_types["R-UP"] }}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Total Firings</td>
+                                <td>{{ leave_types["F"] }}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Average Days for Departed Trump Hire/Appointee</td>
+                                <td>{{ avg_trump_hire_time }}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Average Days for Departed Career Officials</td>
+                                <td>{{ avg_rollover_time }}</td>
+                                <td></td>
+                            </tr>
+                            {% for aff, num in affiliations.items() %}
+                            <tr>
+                                <td></td>
+                                {% if definitions[aff] %}
+                                  <td>Total Departures from {{ definitions[aff] }}</td>
+                                {% else %}
+                                  <td>Total Departures from {{ aff }}</td>
+                                {% endif %}
+                                <td>{{ num }}</td>
+                                <td></td>
+                            </tr>
+                            {% endfor %}
+                        </thead>
+                    </table>
+                </div>
+                <!---/Column --->
+            </div>
+        </div>
+        <!--- /Table Container --->
+</section>
+{% endblock %}
