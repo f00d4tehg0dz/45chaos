@@ -48,5 +48,5 @@ database_name:
 
 # How often in seconds to poll the spreadsheet for updates
 
-update_interval: 60
+update_interval: 300
 ```

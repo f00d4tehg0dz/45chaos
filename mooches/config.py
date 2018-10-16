@@ -9,7 +9,7 @@ DEFAULTS = {
     "host": "0.0.0.0",
     "port": 5000,
     "database_uri": "sqlite:///%s" % os.path.join(basedir, "data.sqlite"),
-    "update_interval": 60,
+    "update_interval": 300,
     "debug": False
 }
 
