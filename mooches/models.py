@@ -156,18 +156,22 @@ def update():
 
     check_database()
     new_records = []
+
     for obj in enumerate_departures():
-        if not mooch_exists(obj):
-            new_records.append(obj)
+        #if not mooch_exists(obj):
+        new_records.append(obj)
+
     for obj in enumerate_legend():
         if not definition_exists(obj):
             new_records.append(obj)
-    if len(new_records) > 0:
-        for obj in new_records:
-            db.session.add(obj)
-        db.session.commit()
-    else:
-        print("No mooches to update")
+
+    num_rows_deleted = db.session.query(Mooch).delete()
+    print("Replacing %s rows" % num_rows_deleted)
+    for obj in new_records:
+        db.session.add(obj)
+    db.session.commit()
+    print("Synced Spreadsheet with DB")
+
 
 
 def enumerate_legend():
