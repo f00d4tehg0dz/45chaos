@@ -61,14 +61,19 @@ ssh-keyscan github.com >> ~ec2-user/.ssh/known_hosts
 chown -R ec2-user: ~ec2-user/.ssh && chmod 0600 ~ec2-user/.ssh/id_rsa
 cd /opt/web && sudo -u ec2-user git clone git@github.com:f00d4tehg0dz/45chaos
 
-# write web config
-cat << EOF > /opt/web/config.yml
+if [[ "${environment}" == "prd" ]]; then
+  # write web config
+  cat << EOF > /opt/web/config.yml
 database_engine: mysql
 database_uri: $${database_url}
 database_username: chaos
 database_password: $${database_password}
 database_name: chaos
 EOF
+else
+  # write empty config (use defaults)
+  echo "" > /opt/web/config.yml
+fi
 
 # checkout, build, and run flask app
 cd /opt/web/45chaos && sudo -u ec2-user git checkout ${git_branch}
