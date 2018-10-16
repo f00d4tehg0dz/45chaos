@@ -3,6 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired, Length
 from datatables import DataTable
+from titlecase import titlecase
 import datetime
 import json
 
@@ -69,7 +70,7 @@ def data():
             ("Under Trump", "TrumpTime", lambda i: "{:,}".format(models.trumpTime(i.DateHired, i.DateLeft))),
             ("Mooches", "MoochesTime"),
             ("Fired/Resign", "LeaveType"),
-            ("Notes"),
+            ("Notes", lambda i: "{}".format(titlecase(i.Notes))),
             ("Sources")
         ]
     )
