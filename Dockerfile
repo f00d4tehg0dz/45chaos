@@ -25,4 +25,4 @@ RUN pip3 install -r requirements.txt
 EXPOSE 5000
 
 # start the webserver
-CMD uwsgi --enable-threads mooches.ini
+CMD uwsgi mooches.ini

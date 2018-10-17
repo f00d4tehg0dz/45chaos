@@ -12,7 +12,7 @@ Jinja allows you to use variables, conditional logic, etc. to format the templat
 You can also use `base` files and extend off them with `blocks` or use `include` statements to include the contents of another template.
 They can also just be straight HTML, as long as no Jinja syntax errors are present.
 
-It's best to just look at the templates that are there, as well as Jinja documentation when you get stuck, to get your feel for how to use them.
+It's best to just look at the templates that are there, as well as [Jinja documentation](http://jinja.pocoo.org/docs/2.10/templates/) when you get stuck, to get your feel for how to use them.
 Hopefully, they are mostly straight-forward.
 
 

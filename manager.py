@@ -1,7 +1,7 @@
 import sys
 
 from flask_script import Manager, Shell
-from mooches import bootstrap_app, db, models
+from mooches import bootstrap_app, db, models, spreadsheets
 
 if "runserver" in sys.argv:
     app, config = bootstrap_app()
@@ -11,16 +11,20 @@ else:
 manager = Manager(app)
 
 def make_shell_context():
+
     """
     Return a shell context with the models and db pre-imported
     """
-    return dict(app=app, db=db, models=models)
+
+    return dict(app=app, db=db, models=models, scraper=spreadsheets.Scraper())
 
 @manager.command
 def initdb():
+
     """
     Seeds the configured database
     """
+
     sys.stdout.write("Seeding configured database...")
     sys.stdout.flush()
     with app.app_context():

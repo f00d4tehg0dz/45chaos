@@ -4,7 +4,7 @@
 
 *NB: If using Windows, it is easiest to use the Windows Subsystem for Linux or Docker for local development*
 
-The web app is written in python >= 3.4 and the required libraries can be installed with:
+The web app is written in `python >= 3.4` and the required libraries can be installed with:
 
 ```bash
 $> pip3 install -r requirements.txt
@@ -27,7 +27,7 @@ It is advisable to use a python virtual environment to isolate your dependancies
 ```bash
 $> python3 -m venv path/to/venv
 $> source path/to/venv/bin/activate # for linux/macOS
-$> pip install requirements.txt
+$> pip install -r requirements.txt
 
 # to leave the virtual environment
 $> deactivate
