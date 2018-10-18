@@ -20,6 +20,7 @@ On macOS it is easiest to install Homebrew and run
 
 ```bash
 $> brew install mysql
+$> PATH=$PATH:/usr/local/mysql/bin
 ```
 
 It is advisable to use a python virtual environment to isolate your dependancies.
