@@ -78,7 +78,7 @@ class Mooch(db.Model):
     Image = db.Column(db.String(64))
     Sources = db.Column(db.Text)
 
-    def json(self):
+    def dict(self):
 
         """
         Dumps a single moocher row to json
@@ -93,7 +93,7 @@ class Mooch(db.Model):
                     mooch_dict[k] = v.strftime("%m/%d/%Y")
                 else:
                     mooch_dict[k] = v
-        return json.dumps(mooch_dict)
+        return mooch_dict
 
 
 class FailedNomination(db.Model):

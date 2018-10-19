@@ -12,6 +12,12 @@ from .. import models, db, stats
 
 collector = stats.StatCollector()
 
+
+@main.route("/departures")
+def departures():
+    return jsonify_mooches(models.Mooch.query.all())
+
+
 @main.route("/")
 def index():
     totalDepartures = len(models.Mooch.query.all())
@@ -108,9 +114,9 @@ def searchprocess():
     query = models.Mooch.query.filter_by(LastName=search_string).first()
     if not query: # no results return empty list
         return json.dumps([])
-    return query.json()
+    return json.dumps(query.dict())
 
 
 # use this function when you have a list of models.Mooch objects to return
 def jsonify_mooches(mooches):
-    return json.dumps([x.json() for x in mooches])
+    return json.dumps([x.dict() for x in mooches])
