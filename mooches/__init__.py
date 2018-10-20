@@ -2,6 +2,7 @@ import os
 import atexit
 import threading
 from flask import Flask
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -25,7 +26,7 @@ def bootstrap_app(no_thread=False):
     app.config["SQLALCHEMY_COMMIT_ON_TEARDOWN"] = True
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.init_app(app)
-
+    CORS(app)
     # import the routes
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
