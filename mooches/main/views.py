@@ -13,6 +13,42 @@ from .. import models, db, stats
 collector = stats.StatCollector()
 
 
+@main.route("/api/departures")
+def api_departures():
+    return jsonify_mooches(models.Mooch.query.all())
+
+@main.route("/api/definitions")
+def api_definitions():
+    return models.Definition.to_json()
+
+@main.route("/api/stats")
+def api_stats():
+    return json.dumps(collector.get_all_stats())
+
+@main.route("/api/stats/affiliations")
+def affiliation_stats():
+    return json.dumps(collector.get_affiliation_stats())
+
+@main.route("/api/stats/perday")
+def perday_string():
+    return collector.get_average_per_day_str()
+
+@main.route("/api/stats/avgtrumptime")
+def avg_trump_time():
+    return str(collector.get_average_trump_time())
+
+@main.route("/api/stats/avgtrumphiretime")
+def avg_trump_hire_time():
+    return str(collector.get_average_trump_hire_time())
+
+@main.route("/api/stats/avgrollovertime")
+def avg_rollover_time():
+    return str(collector.get_average_rollover_time())
+
+@main.route("/api/stats/leavetypes")
+def leave_types():
+    return json.dumps(collector.get_leave_type_stats())
+
 @main.route("/departures")
 def departures():
     return jsonify_mooches(models.Mooch.query.all())

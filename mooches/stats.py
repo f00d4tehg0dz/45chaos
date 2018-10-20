@@ -8,6 +8,16 @@ class StatCollector(object):
     def __init__(self):
         self.localContext, self.config = bootstrap_app(no_thread=True)
 
+    def get_all_stats(self):
+        statDict = {}
+        statDict['Affiliations'] = self.get_affiliation_stats()
+        statDict['AverageTrumpTime'] = self.get_average_trump_time()
+        statDict['LeaveTypes'] = self.get_leave_type_stats()
+        statDict['AverageTrumpHireTime'] = self.get_average_trump_hire_time()
+        statDict['AverageRolloverTime'] = self.get_average_rollover_time()
+        statDict['AveragePerDayStr'] = self.get_average_per_day_str()
+        return statDict
+
     def get_average_per_day_str(self):
         totalTrumpDays = (datetime.today().date() - TRUMP_INAUGURAL).days
         totalDepartures = len(models.Mooch.query.all())
